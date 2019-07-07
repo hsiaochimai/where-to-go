@@ -7,7 +7,7 @@ export default class TripPage extends Component{
             <div className='tab-page'>
                 <div className="padded">
                 <TripSearchBar />
-                    <h2 className="barTitle">Hi!</h2>    
+                      
                 </div>
                 <PlaceList /> 
             </div>

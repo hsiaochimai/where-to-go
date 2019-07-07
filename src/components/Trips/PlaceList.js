@@ -4,7 +4,11 @@ import whereToGoContext from '../whereToGoContext/whereToGoContext'
 export default class PlaceList extends Component{
     static contextType= whereToGoContext
 render(){
-    const placeCard=[...this.context.places].map((place, i)=>{
+    console.log(this.props)
+    const tripID=this.props.trip
+    const tripPlaces= [...this.context.places].filter(place=>place.trip_id===tripID)
+   
+    const placeCard= tripPlaces.map((place, i)=>{
      const card=   <Card key={i}>
         <CardHeader>Name: {place.name}</CardHeader>
         <CardBody><li>Addresss: {place.street_address}</li>
@@ -18,9 +22,8 @@ render(){
     })
     return(
         <div>
-{placeCard}
-
-        </div>
+ {placeCard}
+    </div>
     )
 }
 }
