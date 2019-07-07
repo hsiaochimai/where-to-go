@@ -1,0 +1,28 @@
+.navBar {
+    margin-top: 0;
+    background-color: #AFC2D5;
+    margin-bottom: 0;
+  }
+  .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .links>a {
+    text-decoration: none;
+    padding: 10px;
+    padding-bottom:5px;
+    color: black;
+  }
+  .links>.link{
+    margin-bottom:.5em;
+    line-height:1.2;
+  }
+  .links>.link.active  {
+    border-bottom: .2em solid black;
+  }
+
+  .tab-page {
+    background-color: #8E745E;
+  }
