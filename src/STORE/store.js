@@ -3,8 +3,8 @@ export default {
     {
       id: 1,
       full_name: "Christina Fuller",
-      email: "hi@history.com",
-      password: "hello1"
+      email: "demo@demo.com",
+      password: "demo"
     },
     {
       id: 2,

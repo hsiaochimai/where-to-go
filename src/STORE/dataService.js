@@ -8,11 +8,16 @@ const ds = {
     return user;
   },
   getLoggedInUser: async () => {
-      return user
+    return user
   },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
-    return store.trips.filter(trip => trip.user_id === user.id);
+    const trips = store.trips.filter(trip => trip.user_id === user.id);
+    trips.forEach(trip => {
+      //associated records
+      trip.places = store.places.filter(place => place.trip_id === trip.id)
+    })
+    return trips
   }
 };
 

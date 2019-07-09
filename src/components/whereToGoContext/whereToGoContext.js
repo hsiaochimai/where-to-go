@@ -1,7 +1,9 @@
 import React from 'react'
 const whereToGoContext = React.createContext({
-    trips:[],
-    places:[],
+    user: null,
+    trips: [],
+    places: [],
+    set: () => { },
 })
 
 export default whereToGoContext;

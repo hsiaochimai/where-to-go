@@ -2,9 +2,21 @@ import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { NavTab } from "react-router-tabs";
 import HomePage from "../HomePage/HomePage";
+import TripPage from "../Trips/TripPage";
 import AddTripPage from "../Trips/AddTripPage";
 import './Dashboard.css'
-export default class Dashboard extends Component {
+import { checkLoginAndRedirect } from '../../helpers'
+
+// import './Dashboard.css'
+export default class DashboardPage extends Component {
+  componentDidMount = async () => {
+
+    //if not logged in then redirect to login
+    if (! await checkLoginAndRedirect(this.props.history)) {
+      return
+    }
+  }
+
   render() {
     const { path } = this.props.match;
     return (
@@ -24,7 +36,7 @@ export default class Dashboard extends Component {
               path={`${path}`}
               render={() => <Redirect replace to={`${path}/home`} />}
             />
-            <Route path={`${path}/home`} exact component={HomePage} />
+            <Route path={`${path}/home`} exact component={TripPage} />
             <Route path={`${path}/add-trip`} exact component={AddTripPage} />
           </Switch>
         </div>

@@ -1,39 +1,50 @@
-import React, {Component} from 'react';
-import LoginForm from './components/LoginForm/LoginForm'
+import React, { Component } from 'react';
+import LoginPage from './components/LoginPage/LoginPage'
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import whereToGoContext from './components/whereToGoContext/whereToGoContext'
-import Dashboard from './components/Dashboard/Dashboard';
-import Store from '../src/STORE/Store';
+import DashboardPage from './components/DashboardPage/DashboardPage';
+import store from './STORE/store';
 class App extends Component {
   state = {
+    user: null,
     trips: [],
     places: []
-};
-componentDidMount() {
-  // fake date loading from API call
-  setTimeout(() => this.setState(Store), 600);
-}
-render(){
-  const contextValue={
-    trips:this.state.trips,
-    places:this.state.places
+  };
+  componentDidMount() {
+    // fake date loading from API call
+    // setTimeout(() => this.setState(store), 600);
   }
-  return (
-    <div className="App">
-      <whereToGoContext.Provider value={contextValue}>
-      <BrowserRouter>
+
+  contextSetter = (obj) => {
+    this.setState(obj, () => {
+      console.log('setter:', obj)
+    }) //trips, places or user
+  }
+
+  render() {
+    const contextValue = {
+      ...this.state,
+      set: this.contextSetter,
+
+    }
+    return (
+      <div className="App" >
+        <whereToGoContext.Provider value={contextValue}>
+          <BrowserRouter>
+
             <Switch>
-              <Route exact path="/login" component={LoginForm} />
-              <Route exact path="/" component={LoginForm} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/" component={LoginPage} />
               <Route path='/dashboard'
-                component={Dashboard} />
+                component={DashboardPage} />
             </Switch>
+
           </BrowserRouter>
-          </whereToGoContext.Provider>
-    </div>
-  );
-}
+        </whereToGoContext.Provider>
+      </div>
+    );
+  }
 }
 
 export default App;
