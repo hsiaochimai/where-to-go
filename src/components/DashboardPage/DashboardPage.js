@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { NavTab } from "react-router-tabs";
-import HomePage from "../HomePage/HomePage";
 import TripPage from "../Trips/TripPage";
 import AddTripPage from "../Trips/AddTripPage";
 import './Dashboard.css'
