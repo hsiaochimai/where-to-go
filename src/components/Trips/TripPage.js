@@ -21,10 +21,10 @@ export default class TripPage extends Component {
         return (
             <div className='tab-page'>
                 <div className="padded">
-                    <TripSearchBar />
+                    <TripSearchBar trips={this.context.trips} />
 
                 </div>
-                <PlaceList />
+               
             </div>
         )
     }

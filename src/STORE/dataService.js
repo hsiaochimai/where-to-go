@@ -10,8 +10,18 @@ const ds = {
   getLoggedInUser: async () => {
     return user
   },
+
+
+  deleteTrip: async (id) => {
+    const { trips } = store
+    trips.splice(trips.findIndex(t => t.id === id), 1)
+    // adding a trip
+    // trips.push({id, xx, name:'Foo' ,.......})
+  },
+
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
+    console.log(`ds:getTrips(${user.email})`)
     const trips = store.trips.filter(trip => trip.user_id === user.id);
     trips.forEach(trip => {
       //associated records
