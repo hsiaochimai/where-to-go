@@ -5,7 +5,7 @@ export default class PlaceList extends Component{
     static contextType= whereToGoContext
 render(){
     console.log(this.props)
-    const tripID=this.props.trip
+    const tripID=this.props.tripID
     const tripPlaces= [...this.context.places].filter(place=>place.trip_id===tripID)
    
     const placeCard= tripPlaces.map((place, i)=>{

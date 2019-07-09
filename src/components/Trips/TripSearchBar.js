@@ -23,7 +23,7 @@ return options
             <Select options= {tripOpts}
             onChange={e=>this.onTripSelected(e.value)}/>
              <h2 className="barTitle">{this.state.selectedTripID}</h2> 
-            <PlaceList trip={this.state.selectedTripID}/> 
+            <PlaceList tripID={this.state.selectedTripID}/> 
         </div>)
     }
 }
