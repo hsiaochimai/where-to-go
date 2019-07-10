@@ -11,7 +11,7 @@ export default class ControlledInput extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { value: props.initialValue || '' }
+        this.state = { value: this.props.initialValue || '' }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -33,11 +33,11 @@ export default class ControlledInput extends React.Component {
     }
 
     render() {
-        if (!this.props.editMode) {
-            return <>{this.state.value}</>
-        }
+        // if (!this.props.editMode) {
+        //     return <>{this.state.value}</>
+        // }
         const { editMode, initialValue, tag, onChange,required, ...rest } = this.props
-     
+     console.log('controlled input where are you')
         const props = {
             ...rest,
             onChange: this.onChange,
@@ -45,6 +45,7 @@ export default class ControlledInput extends React.Component {
             required,
             
         }
+        
         return React.createElement(tag, props)
     }
 }

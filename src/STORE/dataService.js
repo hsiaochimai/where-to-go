@@ -28,6 +28,11 @@ const ds = {
       trip.places = store.places.filter(place => place.trip_id === trip.id)
     })
     return trips
+  },
+  deletePlace: async (id) => {
+    const { places } = store
+    places.splice(places.findIndex(p => p.id === id), 1)
+    console.log(`did the delete work`,places)
   }
 };
 
