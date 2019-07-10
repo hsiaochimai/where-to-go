@@ -40,7 +40,7 @@ onEdit=() =>{
             <div>
                 <Select options={tripOpts}
                     onChange={e => this.onTripSelected(e)} />
-                    <button onClick={()=>this.onEdit()}>Edit</button>
+                {!selectedTrip? null : <button onClick={()=>this.onEdit()}>Edit</button>}
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numOfDays} days`}</h2>
               {this.state.editMode? <EditTrip trip={selectedTrip}/>: null}

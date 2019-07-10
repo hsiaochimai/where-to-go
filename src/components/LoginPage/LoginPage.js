@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import * as EmailValidator from "email-validator";
 import ValidationErrors from "../ValidationErrors/ValidationErrors"
+import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import ds from "../../STORE/dataService"
 export default class LoginForm extends Component {
+  static contextType = whereToGoContext
   constructor(props) {
     super(props);
     this.state = {
@@ -66,6 +68,7 @@ export default class LoginForm extends Component {
     if (!user) {
       //TODO toast
     } else {
+      this.context.set({ user })
       console.log('Logged in as', user.email)
       this.props.history.push("/dashboard");
     }

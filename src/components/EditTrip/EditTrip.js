@@ -18,7 +18,6 @@ export default class EditTrip extends Component{
         //     numOfdays
         // }=this.props.trip
         return(<div>
-            hi!
             <form>
           <p>
             <span>Name</span>
