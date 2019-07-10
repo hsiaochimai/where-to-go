@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import Select from "react-select";
 import PlaceList from './PlaceList'
+import EditTrip from '../EditTrip/EditTrip'
 import pt from 'prop-types'
 export default class TripSearchBar extends Component {
     // static contextType = whereToGoContext
@@ -11,25 +12,37 @@ export default class TripSearchBar extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { selectedTripID: null }
+        this.state = { 
+            selectedTripID: null,
+            editMode:false
+        }
     }
     onTripSelected = (tripValue) => {
-        this.setState({ selectedTripID: tripValue })
+        console.log(`hello trip selected`,tripValue)
+        this.setState({ selectedTripID: tripValue.value })
     }
-
+onEdit=() =>{
+    this.setState({
+        editMode:true
+    })
+}
     render() {
         const selectedTrip = this.props.trips.find(t => t.id === this.state.selectedTripID)
+        console.log(`hello trip selected`,selectedTrip)
         const tripOpts = [...this.props.trips].map(trip => {
             const options = { value: trip.id, label: trip.name }
             return options
         })
-        // console.log(this.context)
+        const editModeClass= this.state.editMode=== true ?'hide':''
+        console.log(this.state)
         return (
             <div>
                 <Select options={tripOpts}
-                    onChange={e => this.onTripSelected(e.value)} />
-                <h2 className="barTitle">{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
-
+                    onChange={e => this.onTripSelected(e)} />
+                    <button onClick={()=>this.onEdit()}>Edit</button>
+                <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
+                <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numOfDays} days`}</h2>
+               <EditTrip trip={selectedTrip}/>
                 {(!this.state.selectedTripID ?
                     null :
                     <PlaceList trip={selectedTrip} />
