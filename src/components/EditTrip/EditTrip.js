@@ -11,7 +11,8 @@ export default class EditTrip extends Component{
     
       }
     render(){
-        console.log(`edit trip`, this.state.trip)
+      
+        console.log(`edit trip`, this.props.trip)
         // const{
         //     name,
         //     numOfdays
@@ -26,10 +27,22 @@ export default class EditTrip extends Component{
                   tag="input"
                   type="text"
                   required={true}
-                //   initialValue={name}
+                  initialValue={this.props.trip.name}
                 //   editMode={editMode}
                 />
               
+          </p>
+          <p>
+            <span>Duration of Stay</span>
+                <ControlledInput
+                //   onChange={value => this.onChange("full_name", value)}
+                  tag="input"
+                  type="number"
+                  required={true}
+                  initialValue={this.props.trip.numOfDays}
+                //   editMode={editMode}
+                />
+              days
           </p>
           </form>
         </div>)

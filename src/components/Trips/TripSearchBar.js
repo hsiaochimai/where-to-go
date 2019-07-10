@@ -3,6 +3,7 @@ import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import Select from "react-select";
 import PlaceList from './PlaceList'
 import EditTrip from '../EditTrip/EditTrip'
+import './TripPage.css'
 import pt from 'prop-types'
 export default class TripSearchBar extends Component {
     // static contextType = whereToGoContext
@@ -42,7 +43,7 @@ onEdit=() =>{
                     <button onClick={()=>this.onEdit()}>Edit</button>
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numOfDays} days`}</h2>
-               <EditTrip trip={selectedTrip}/>
+              {this.state.editMode? <EditTrip trip={selectedTrip}/>: null}
                 {(!this.state.selectedTripID ?
                     null :
                     <PlaceList trip={selectedTrip} />
