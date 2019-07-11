@@ -70,13 +70,13 @@ export default class LoginForm extends Component {
     } else {
       this.context.set({ user })
       console.log('Logged in as', user.email)
-      this.props.history.push("/dashboard");
+      this.props.history.push("/home");
     }
   }
   render() {
     return (
       <div className="LoginPage-Container">
-        <h2>Welcome to Where to go!</h2>
+        <h2>Where to go!</h2>
         <p>
           Where to go is a trip management tool where you can store places you want to go for upcoming trips!
           </p>

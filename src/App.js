@@ -3,8 +3,11 @@ import LoginPage from './components/LoginPage/LoginPage'
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import whereToGoContext from './components/whereToGoContext/whereToGoContext'
-import DashboardPage from './components/DashboardPage/DashboardPage';
 import store from './STORE/store';
+import LandingPage from './components/LandingPage/LandingPage';
+import NavBar from './components/NavBar/NavBar';
+import AddTripPage from './components/Trips/AddTripPage';
+import TripPage from './components/Trips/TripPage';
 class App extends Component {
   state = {
     user: null,
@@ -31,13 +34,18 @@ class App extends Component {
     return (
       <div className="App" >
         <whereToGoContext.Provider value={contextValue}>
+         
           <BrowserRouter>
-
+         
             <Switch>
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/" component={LoginPage} />
               <Route path='/dashboard'
-                component={DashboardPage} />
+                component={TripPage} />
+                <Route path='/home'
+                component={LandingPage} />
+                <Route path='/add-trip'
+                component={AddTripPage} />
             </Switch>
 
           </BrowserRouter>

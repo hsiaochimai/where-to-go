@@ -8,12 +8,11 @@ export default class TripList extends Component{
         const trips= [...this.props.trips]
         const tripList= trips.map((trip, i)=>{
 return <div>
-    <h2>{trip.name}</h2>
+    <h2 onClick={e=>this.props.onTripSelected(trip.id)}>{trip.name}</h2>
 </div>
         })
-        console.log(this.props)
         return(<div>
             {tripList}
-            hi!</div>)
+            </div>)
     }
 }

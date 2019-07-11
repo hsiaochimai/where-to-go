@@ -27,6 +27,7 @@ export default class DashboardPage extends Component {
           <NavTab to={`${path}/add-trip`} className="link">
             Add Trip
           </NavTab>
+          <NavTab>Logout</NavTab>
         </nav>
         <div className="tabs">
           <Switch>
@@ -37,6 +38,8 @@ export default class DashboardPage extends Component {
             />
             <Route path={`${path}/home`} exact component={TripPage} />
             <Route path={`${path}/add-trip`} exact component={AddTripPage} />
+            <Route path={`${path}/home/trip/:tripid`} exact component={TripPage} />
+         
           </Switch>
         </div>
       </div>

@@ -17,6 +17,7 @@ export default class AddTripPage extends Component {
   onSaveTrip = async trip => {
 
     await ds.saveTrip(trip);
+    this.props.history.push("/dashboard")
   };
 
   componentDidMount = async () => {

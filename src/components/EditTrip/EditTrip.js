@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
-import pt from 'prop-types'
+import pt from "prop-types";
 export default class EditTrip extends Component {
-  static propTypes= {
-    onSaveTrip:pt.func.isRequired,
-    trip:pt.object.isRequired,
-  }
+  static propTypes = {
+    onSaveTrip: pt.func.isRequired,
+    trip: pt.object.isRequired
+  };
   constructor(props) {
     super(props);
     const { trip } = this.props;
@@ -14,7 +14,6 @@ export default class EditTrip extends Component {
     };
   }
 
-  
   onChange = (fieldName, value) => {
     const changedTrip = { ...this.state.trip, [fieldName]: value };
     this.setState({ trip: changedTrip }, () => {
@@ -27,10 +26,9 @@ export default class EditTrip extends Component {
 
     return (
       <div>
-        
-                <button
-                onClick = {ev=>this.props.onSaveTrip(this.state.trip)}
-                >Save</button>
+        <button onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+          Save
+        </button>
         <form>
           <p>
             <span>Name</span>
@@ -46,7 +44,7 @@ export default class EditTrip extends Component {
           <p>
             <span>Duration of Stay</span>
             <ControlledInput
-                onChange={value => this.onChange("numOfDays", value)}
+              onChange={value => this.onChange("numOfDays", value)}
               tag="input"
               type="number"
               min="1"
