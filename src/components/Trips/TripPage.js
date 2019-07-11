@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TripSearchBar from "./TripSearchBar";
-import PlaceList from "./PlaceList";
 import { checkLoginAndRedirect } from "../../helpers";
 import ds from "../../STORE/dataService";
 import whereToGoContext from "../whereToGoContext/whereToGoContext";

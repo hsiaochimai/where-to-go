@@ -33,13 +33,14 @@ const ds = {
     trips.splice(trips.findIndex(t => t.id === id), 1);
     // adding a trip
     // trips.push({id, xx, name:'Foo' ,.......})
+    console.log(`this is delete`,trips)
   },
   saveTrip: async tripObj => {
     const trip = { ...tripObj };
-
+    
     //assign an ID
     if (trip.id === -1) {
-      trip.id = store.trips.length;
+      trip.id = store.trips.length +1;
     }
 
     //make sure the user is the current one
@@ -55,7 +56,9 @@ const ds = {
       trips.splice(trips.findIndex(t => t.id === trip.id), 1, trip);
     } else {
       trips.unshift(trip);
+     
     }
+    console.log(`does this work?`,trips)
   },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {

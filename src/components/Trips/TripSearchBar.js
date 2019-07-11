@@ -4,7 +4,10 @@ import Select from "react-select";
 import PlaceList from './PlaceList'
 import EditTrip from '../EditTrip/EditTrip'
 import './TripPage.css'
+import ds from '../../STORE/dataService'
 import pt from 'prop-types'
+import TripList from '../TripList/TripList'
+const {deleteTrip}=ds
 export default class TripSearchBar extends Component {
     // static contextType = whereToGoContext
     static propTypes = {
@@ -27,23 +30,27 @@ onEdit=() =>{
         editMode:true
     })
 }
+
     render() {
         const selectedTrip = this.props.trips.find(t => t.id === this.state.selectedTripID)
         console.log(`hello trip selected`,selectedTrip)
-        const tripOpts = [...this.props.trips].map(trip => {
-            const options = { value: trip.id, label: trip.name }
-            return options
-        })
+        const tripOpts = [...this.props.trips]
+        
+        // .map(trip => {
+        //     const options = { value: trip.id, label: trip.name }
+        //     return options
+        // })
         const editModeClass= this.state.editMode=== true ?'hide':''
         console.log(this.state)
         return (
             <div>
+                <TripList trips={tripOpts}/>
                 <Select options={tripOpts}
                     onChange={e => this.onTripSelected(e)} />
                 {!selectedTrip? null : 
                 <div className='action-buttons'>
                 <button onClick={()=>this.onEdit()}>Edit</button>
-                <button>Delete</button>
+                <button onClick={()=> deleteTrip(selectedTrip.id)}>Delete</button>
                 </div>
                 }
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
