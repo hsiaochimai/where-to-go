@@ -40,10 +40,17 @@ onEdit=() =>{
             <div>
                 <Select options={tripOpts}
                     onChange={e => this.onTripSelected(e)} />
-                {!selectedTrip? null : <button onClick={()=>this.onEdit()}>Edit</button>}
+                {!selectedTrip? null : 
+                <div className='action-buttons'>
+                <button onClick={()=>this.onEdit()}>Edit</button>
+                <button>Delete</button>
+                </div>
+                }
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numOfDays} days`}</h2>
-              {this.state.editMode? <EditTrip trip={selectedTrip}/>: null}
+              {this.state.editMode? <EditTrip 
+              onSaveTrip={this.props.onSaveTrip}
+              trip={selectedTrip}/>: null}
                 {(!this.state.selectedTripID ?
                     null :
                     <PlaceList trip={selectedTrip} />

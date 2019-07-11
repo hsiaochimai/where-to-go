@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import whereToGoContext from '../whereToGoContext/whereToGoContext'
+import ds from '../../STORE/dataService'
+const defaultTrip = {
+  id: '',
+  name: "",
+  numOfDays: null,
+  user_id: null,
+  completed: false
+};
+
 export default class AddTripPage extends Component {
     static contextType = whereToGoContext
   constructor() {
@@ -13,6 +22,12 @@ export default class AddTripPage extends Component {
       completed: false
     };
   }
+
+  onSaveTrip = async trip => {
+
+    await ds.saveTrip(trip);
+  };
+
   onChange = (fieldName, value) => {
 
 

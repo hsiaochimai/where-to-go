@@ -34,7 +34,29 @@ const ds = {
     // adding a trip
     // trips.push({id, xx, name:'Foo' ,.......})
   },
+  saveTrip: async tripObj => {
+    const trip = { ...tripObj };
 
+    //assign an ID
+    if (trip.id === -1) {
+      trip.id = store.trips.length;
+    }
+
+    //make sure the user is the current one
+    const user = await ds.getLoggedInUser()
+    trip.user_id = user.id
+
+
+    //make sure numOfDays is a number
+    trip.numOfDays = +trip.numOfDays;
+    const { trips } = store;
+    const index = trips.findIndex(t => t.id === trip.id);
+    if (index > -1) {
+      trips.splice(trips.findIndex(t => t.id === trip.id), 1, trip);
+    } else {
+      trips.unshift(trip);
+    }
+  },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
     console.log(`ds:getTrips(${user.email})`);
