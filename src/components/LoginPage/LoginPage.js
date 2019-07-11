@@ -3,6 +3,7 @@ import * as EmailValidator from "email-validator";
 import ValidationErrors from "../ValidationErrors/ValidationErrors"
 import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import ds from "../../STORE/dataService"
+import './LoginPage.css'
 export default class LoginForm extends Component {
   static contextType = whereToGoContext
   constructor(props) {
@@ -76,6 +77,7 @@ export default class LoginForm extends Component {
   render() {
     return (
       <div className="LoginPage-Container">
+         <div className="LoginPage padded">
         <h2>Where to go!</h2>
         <p>
           Where to go is a trip management tool where you can store places you want to go for upcoming trips!
@@ -109,6 +111,7 @@ export default class LoginForm extends Component {
         <div className="padded-top">
           <p>Demo Email: demo@demo.com</p>
           <p>Demo Password: demo</p>
+        </div>
         </div>
       </div>
     )

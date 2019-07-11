@@ -1,0 +1,60 @@
+.LoginPage-Container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.LoginPage {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* height: 75vh; */
+    /* width:75%; */
+    max-width: 400px;
+    margin:1em;
+  
+    background: rgba(0,0,0, 0.2);
+    border-radius: .5em;
+  
+  }
+  
+  .LoginPage p {
+    line-height:140%;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .LoginForm {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .LoginForm form {
+    margin: auto;
+  }
+  
+  .LoginForm label {
+    font-size: 18px;
+  }
+  
+  .LoginForm input {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .LoginForm button {
+    display: block;
+    margin: auto;
+    width: 30%;
+    display: block;
+    background-color: #6CAE75;
+    margin: auto;
+    font-size: 18px;
+  }
+  
+  .LoginForm button:hover {
+    background-color: #F1FFFA;
+  }
