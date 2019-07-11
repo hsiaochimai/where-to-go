@@ -6,9 +6,11 @@ export default class LandingPage extends Component{
         return(
             <div>
                  <NavBar/>
+                 <div className='landing-page'>
                 <h1>Welcome to Where To Go!</h1>
           <p>Get started by adding a new trip!</p>
          <Link to='/add-trip'> <button>Add Trip</button></Link>
+         </div>
             </div>
         )
     }

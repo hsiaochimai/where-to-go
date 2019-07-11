@@ -1,0 +1,27 @@
+.nav-bar{
+    background: #F4D06F;
+    height:10vh;
+    /* display:flex;
+    flex-direction:row;
+    justify-content: left; */
+    
+    
+}
+.nav-bar ul li{
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    height: 2%;
+   
+}
+.nav-bar a{
+    text-decoration: none;
+    color:black;
+}
+.nav-bar a:visited{
+    text-decoration: none;
+}
+.nav-bar a:hover{
+    background-color:#C9DDFF;
+    text-decoration: underline;
+}

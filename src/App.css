@@ -1,12 +1,19 @@
-html {
+/* html {
     background-image: url("./images/Orangevan.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
-  }
+  } */
 
   .App {
     height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
+  }
+  /*global styles*/
+  .padded {
+    padding: 1em;
+  }
+  .hide {
+    display: none;
   }

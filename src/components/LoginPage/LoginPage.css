@@ -1,4 +1,8 @@
 .LoginPage-Container{
+    background-image: url("../../images/Orangevan.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -25,8 +29,11 @@
     line-height:140%;
   }
   
-  h2 {
+  .LoginPage h2 {
+      margin-top:10px;
     text-align: center;
+    font-size:  2em;
+    margin-bottom: 10px;
   }
   
   .LoginForm {
@@ -52,7 +59,7 @@
     margin: auto;
     width: 30%;
     display: block;
-    background-color: #6CAE75;
+    background-color: #D78423;
     margin: auto;
     font-size: 18px;
   }
