@@ -4,6 +4,8 @@ import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import { checkLoginAndRedirect } from "../../helpers";
 import EditTrip from '../EditTrip/EditTrip'
 import ds from '../../STORE/dataService'
+import NavBar from '../NavBar/NavBar'
+import './AddTripPage.css'
 const defaultTrip = {
   id: -1,
   name: "",
@@ -33,12 +35,17 @@ export default class AddTripPage extends Component {
   render() {
       console.log(this.context)
     return (
-      <div>
-        Add Trip
+      <>
+      <NavBar/>
+      <div className='addTrip-Container'>
+        <div className='addTripPage padded'>
+        <h2>Add Trip</h2>
         <EditTrip 
               onSaveTrip={this.onSaveTrip}
               trip={defaultTrip}/>
       </div>
+      </div>
+      </>
     );
   }
 }

@@ -25,13 +25,9 @@ export default class EditTrip extends Component {
     const { name, numOfDays } = this.state.trip;
 
     return (
-      <div>
-        <button onClick={ev => this.props.onSaveTrip(this.state.trip)}>
-          Save
-        </button>
-        <form>
-          <p>
-            <span>Name</span>
+      <div className='edit-trip'>
+        <form className='edit-trip-form flex-column'>
+            <label>Trip name:</label>
             <ControlledInput
               onChange={value => this.onChange("name", value)}
               tag="input"
@@ -40,9 +36,9 @@ export default class EditTrip extends Component {
               initialValue={name}
               //   editMode={editMode}
             />
-          </p>
-          <p>
-            <span>Duration of Stay</span>
+         
+         
+            <label>Number of Days:</label>
             <ControlledInput
               onChange={value => this.onChange("numOfDays", value)}
               tag="input"
@@ -52,9 +48,11 @@ export default class EditTrip extends Component {
               initialValue={numOfDays}
               //   editMode={editMode}
             />
-            days
-          </p>
+          
         </form>
+        <button onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+          Save
+        </button>
       </div>
     );
   }
