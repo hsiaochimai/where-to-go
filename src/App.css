@@ -14,6 +14,28 @@
   .padded {
     padding: 1em;
   }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .h-spaced {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
   .hide {
     display: none;
+  }
+  button{
+    display: block;
+    margin: auto;
+    width: 20%;
+    display: block;
+    background-color: #D78423;
+    margin: auto;
+    font-size: 18px; 
   }

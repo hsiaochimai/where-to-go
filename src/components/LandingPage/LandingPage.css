@@ -1,0 +1,22 @@
+.landing-page{
+height:100vh;
+background-color: #F8CBB0;
+
+
+}
+
+.landing-page h1{
+    font-size: 2em;
+    margin-top: 1.5em;
+    margin-left: 1em;
+}
+
+.landing-page p{
+    margin-top: 1.5em;
+    margin-left: 2em;
+}
+
+.landing-page button{
+    margin-top: 1.5em;
+    margin-left: 2em;
+}
