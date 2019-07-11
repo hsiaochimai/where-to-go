@@ -7,11 +7,11 @@ export default class TripList extends Component{
     render(){
         const trips= [...this.props.trips]
         const tripList= trips.map((trip, i)=>{
-return <div>
-    <h2 onClick={e=>this.props.onTripSelected(trip.id)}>{trip.name}</h2>
-</div>
+return <h2 className='padded' onClick={e=>this.props.onTripSelected(trip.id)}>{trip.name}</h2>
+
         })
-        return(<div>
+        return(
+        <div className='tripList'>
             {tripList}
             </div>)
     }

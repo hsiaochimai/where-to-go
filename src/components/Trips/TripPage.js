@@ -60,13 +60,17 @@ export default class TripPage extends Component {
         
       <div className="tab-page">
           <NavBar/>
-        <div className="padded">
+        <div className="trip-page-container  flex-row">
           <TripList trips={trips} onTripSelected={this.onTripSelected}/>
-       
-          <h2 className={`barTitle ${editModeClass}`}>
+
+
+       <div className='column50'>
+         <div className='title-container flex-row'>
+         <div className='title'>
+          <h2 className={`barTitle padded ${editModeClass}`}>
             {!selectedTrip ? "Please select" : selectedTrip.name}
           </h2>
-          <h2 className={`barTitle ${editModeClass}`}>
+          <h2 className={`barTitle padded ${editModeClass}`}>
             {!selectedTrip
               ? null
               : `Duration of stay: ${selectedTrip.numOfDays} days`}
@@ -75,24 +79,31 @@ export default class TripPage extends Component {
           {this.state.editMode ? (
             <EditTrip onSaveTrip={this.onSaveTrip} trip={selectedTrip} />
           ) : null}
+          </div>
+
           {!selectedTrip  ? null : (
-            <div className={`action-buttons ${editModeClass}`}>
+            <div className={`action-buttons  ${editModeClass}`}>
               <button onClick={() => this.onEdit()}>Edit</button>
               <button onClick={() => deleteTrip(selectedTrip.id)}>
                 Delete
               </button>
             </div>
           )}
+</div>
+
           {!this.state.selectedTripID ? null : (
             <PlaceList trip={selectedTrip} />
           )}
+</div>
+
 
           {/* <TripSearchBar
             onSaveTrip={this.onSaveTrip}
             trips={this.context.trips}
           /> */}
         </div>
-      </div>
+        </div>
+      
     );
   }
 }

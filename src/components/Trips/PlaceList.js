@@ -33,7 +33,7 @@ export default class PlaceList extends Component {
             return card
         })
         return (
-            <div>
+            <div className='placeList'>
                
                 {placeCard}
             </div>

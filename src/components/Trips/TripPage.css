@@ -1,3 +1,18 @@
-.hide{
-    display:none
+.tripList{
+background-color: #60992D;
+height:100vh;
+flex:1;
+}
+.column50{
+    background-color: #F8CBB0;
+    flex:3;
+}
+
+.action-buttons{
+    /* display:block;
+    margin-left: 250px; */
+    display: flex;
+  align-items: right;
+  float: right;
+  padding-left: 1em;
 }
