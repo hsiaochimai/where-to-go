@@ -28,10 +28,10 @@ render(){
       } = this.state.place;
       const { editMode } = this.props;
     return(
-        <div>
+        <div className='cardContent padded'>
             <form>
             <p>
-            <span>Name</span>
+            <span className='padded'>Name</span>
             {!editMode ? (
               name
             ) : (
@@ -46,7 +46,7 @@ render(){
               )}
           </p>
           <p>
-            <span>Address</span>
+            <span className='padded'>Address</span>
             {!editMode ? (
               street_address
             ) : (
@@ -61,7 +61,7 @@ render(){
             )}
                 </p>
                 <p>
-            <span>City</span>
+            <span className='padded'>City</span>
             {!editMode ? (
               city
             ) : (
@@ -76,7 +76,7 @@ render(){
             )}
                 </p>
                 <p>
-            <span>Transportation</span>
+            <span className='padded'>Transportation</span>
             {!editMode ? (
               transportation
             ) : (
@@ -91,7 +91,7 @@ render(){
             )}
                 </p>
                 <p>
-            <span>Notes</span>
+            <span className='padded'>Notes</span>
             {!editMode ? (
               notes
             ) : (
