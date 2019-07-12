@@ -2,6 +2,7 @@
     margin-top: 0;
     background-color: #AFC2D5;
     margin-bottom: 0;
+    width:100vw;
   }
   .links {
     display: flex;
