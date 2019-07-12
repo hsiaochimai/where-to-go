@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 export default class ControlledInput extends React.Component {
 
     static propTypes = {
-        editMode: PropTypes.bool,
         initialValue: PropTypes.any,
         tag: PropTypes.any,
     }
@@ -33,7 +32,7 @@ export default class ControlledInput extends React.Component {
     }
 
     render() {
-        // if (!this.props.editMode) {
+        // if (this.props.placeMode) {
         //     return <>{this.state.value}</>
         // }
         const { editMode, initialValue, tag, onChange,required, ...rest } = this.props

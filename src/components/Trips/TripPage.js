@@ -15,7 +15,8 @@ export default class TripPage extends Component {
     super(props);
     this.state = {
       selectedTripID: null,
-      editMode: false
+      editMode: false,
+      selectedPlaceID: null
     };
   }
   onSaveTrip = async trip => {
@@ -44,6 +45,7 @@ export default class TripPage extends Component {
     console.log(`hello trip selected`, tripId);
     this.setState({ selectedTripID: tripId });
   };
+ 
   onEdit = () => {
     this.setState({
       editMode: true
