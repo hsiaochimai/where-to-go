@@ -5,20 +5,30 @@ export default class EditPlace extends Component{
     constructor(props) {
         super(props);
         const { place } = this.props;
+        
         this.state = {
         place: {...place}
     
         }
 }
+componentWillReceiveProps(nextProps){
+    if (nextProps.place !== this.props.place) {
+      this.setState({ place: nextProps.place })
+    }
+  }
 onChange = (fieldName, value) => {
     const changedPlace = { ...this.state.place, [fieldName]: value };
     this.setState({ place: changedPlace }, () => {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
- 
+ componentDidMount(){
+
+ }
 render(){
-    console.log(`edit place`, this.state);
+    console.log(`edit place props`, this.props);
+    console.log(`edit place state`, this.state);
+   
     const {
         name,
         street_address,
@@ -29,8 +39,9 @@ render(){
       } = this.state.place;
       const { editMode } = this.props;
     return(
+        
         <div className='cardContent padded'>
-            <form onSubmit={e=>{this.onSubmitPlace(this.state.place)}}>
+            <form >
             <p>
             <span className='padded'>Name</span>
             {!editMode ? (

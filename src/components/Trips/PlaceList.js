@@ -7,6 +7,18 @@ import './PlaceList.css'
 import pt from 'prop-types'
 // import whereToGoContext from '../whereToGoContext/whereToGoContext'
 const {deletePlace, savePlace} = ds
+const newPlaceTemplate={
+    
+        id: -1,
+        name: "",
+        trip_id: null,
+        street_address: "",
+        city: "",
+        transportation: "",
+        notes: "",
+        visited: false
+      
+}
 export default class PlaceList extends Component {
     // static contextType= whereToGoContext
     static propTypes = {
@@ -16,6 +28,7 @@ export default class PlaceList extends Component {
         super()
         this.state={
             editModeIndex:null,
+            newPlace:null
             }
     }
     toggleeditModeIndex = (index) => {
@@ -24,10 +37,19 @@ export default class PlaceList extends Component {
             editModeIndex: index -1
         })
     }
+    onAddPlace=()=>{
+        newPlaceTemplate.trip_id=this.props.trip.id
+        this.setState({
+            newPlace:newPlaceTemplate,
+            editModeIndex:0
+        })
+    }
     onSubmitPlace= async ( place) =>{
         await savePlace(place)
         this.setState({
-            editModeIndex: null
+            editModeIndex: null,
+            newPlace:null
+
         })
     
     }
@@ -39,8 +61,12 @@ export default class PlaceList extends Component {
             return null
         }
         const tripPlaces = trip.places
-
+if(this.state.newPlace){
+    tripPlaces.unshift(this.state.newPlace)
+    console.log(`this is trip places`,tripPlaces)
+}
         const placeCard = tripPlaces.map((place, index) => {
+            console.log(`this is place`,place)
             const isEditing = this.state.editModeIndex === index
             const card = 
                  <div className='placeCard'>
@@ -60,7 +86,7 @@ export default class PlaceList extends Component {
         })
         return (
             <div className='placeList'>
-               
+               <button onClick={()=>this.onAddPlace()}>Add Place</button>
                 {placeCard}
             </div>
         )
