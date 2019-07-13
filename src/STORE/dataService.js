@@ -74,7 +74,32 @@ const ds = {
     const { places } = store;
     places.splice(places.findIndex(p => p.id === id), 1);
     console.log(`did the delete work`, places);
-  }
+  },
+  savePlace: async placeObj => {
+    const place = { ...placeObj };
+    
+    //assign an ID
+    if (place.id === -1) {
+      place.id = store.places.length +1;
+    }
+
+    //make sure the user is the current one
+    // const user = await ds.getLoggedInUser()
+    // trip.user_id = user.id
+
+
+    //make sure numOfDays is a number
+  
+    const { places} = store;
+    const index = places.findIndex(p => p.id === place.id);
+    if (index > -1) {
+      places.splice(places.findIndex(p => p.id === place.id), 1, place);
+    } else {
+      places.unshift(place);
+     
+    }
+    console.log(`does places work?`,places)
+  },
 };
 
 export default ds;

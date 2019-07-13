@@ -16,6 +16,7 @@ onChange = (fieldName, value) => {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
+ 
 render(){
     console.log(`edit place`, this.state);
     const {
@@ -29,7 +30,7 @@ render(){
       const { editMode } = this.props;
     return(
         <div className='cardContent padded'>
-            <form>
+            <form onSubmit={e=>{this.onSubmitPlace(this.state.place)}}>
             <p>
             <span className='padded'>Name</span>
             {!editMode ? (
@@ -105,9 +106,10 @@ render(){
                 />
             )}
                 </p>
+                
                 </form>
 
-
+                <button onClick={ev => this.props.onSubmitPlace(this.state.place)}>Save</button>
 
         </div>
     )

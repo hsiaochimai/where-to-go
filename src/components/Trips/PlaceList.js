@@ -6,7 +6,7 @@ import EditPlace from '../EditPlace/EditPlace'
 import './PlaceList.css'
 import pt from 'prop-types'
 // import whereToGoContext from '../whereToGoContext/whereToGoContext'
-const {deletePlace} = ds
+const {deletePlace, savePlace} = ds
 export default class PlaceList extends Component {
     // static contextType= whereToGoContext
     static propTypes = {
@@ -24,7 +24,10 @@ export default class PlaceList extends Component {
             editModeIndex: index -1
         })
     }
-
+    onSubmitPlace= async ( place) =>{
+        await savePlace(place)
+        console.log(this.props)
+    }
     render() {
         // console.log(this.props)
         console.log(`this is placelist state`, this.state);
@@ -44,14 +47,8 @@ export default class PlaceList extends Component {
                  <button onClick={()=>deletePlace(place.id)} >Delete</button>
                  </div>
                 <div className="cardContent padded">
-                    <EditPlace place={place} editMode={isEditing}/>
-                 {/* <h2> {place.name}</h2> 
-               <ul className='padded'>
-                <li className='padded'>Addresss: {place.street_address}</li>
-                    <li className='padded'>City: {place.city}</li>
-                    <li className='padded'>Transporation: {place.transportation}</li>
-                    <p className='padded'>Notes: {place.notes}</p>
-                    </ul> */}
+                    <EditPlace place={place} editMode={isEditing} onSubmitPlace={this.onSubmitPlace}/>
+            
                     </div>
                 
                 </div>
