@@ -26,8 +26,6 @@ onChange = (fieldName, value) => {
 
  }
 render(){
-    console.log(`edit place props`, this.props);
-    console.log(`edit place state`, this.state);
    
     const {
         name,
