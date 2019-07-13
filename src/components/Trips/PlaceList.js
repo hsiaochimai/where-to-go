@@ -26,7 +26,10 @@ export default class PlaceList extends Component {
     }
     onSubmitPlace= async ( place) =>{
         await savePlace(place)
-        console.log(this.props)
+        this.setState({
+            editModeIndex: null
+        })
+    
     }
     render() {
         // console.log(this.props)
