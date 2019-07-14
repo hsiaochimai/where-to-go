@@ -50,8 +50,13 @@ export default class PlaceList extends Component {
       editModeIndex: null,
       newPlace: null
     });
-    debugger
+    
   };
+  onCancelPlace=()=>{
+    this.setState({
+      editModeIndex: null
+    });
+  }
   render() {
     // console.log(this.props)
     const trip = this.props.trip;
@@ -77,6 +82,7 @@ export default class PlaceList extends Component {
               place={place}
               editMode={isEditing}
               onSubmitPlace={this.onSubmitPlace}
+              onCancelPlace={this.onCancelPlace}
             />
           </div>
         </div>

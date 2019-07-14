@@ -23,7 +23,9 @@ export default class TripPage extends Component {
     await ds.saveTrip(trip);
     this.loadData();
   };
-
+cancelButton=()=>{
+  this.setState({editMode:false})
+}
   loadData = async () => {
     try {
       const trips = await ds.getTrips();
@@ -79,7 +81,7 @@ export default class TripPage extends Component {
           </h2>
           
           {this.state.editMode ? (
-            <EditTrip onSaveTrip={this.onSaveTrip} trip={selectedTrip} />
+            <EditTrip onSaveTrip={this.onSaveTrip} trip={selectedTrip} cancelButton={this.cancelButton} />
           ) : null}
           </div>
 

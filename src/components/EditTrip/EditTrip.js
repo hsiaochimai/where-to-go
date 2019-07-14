@@ -53,6 +53,7 @@ export default class EditTrip extends Component {
         <button onClick={ev => this.props.onSaveTrip(this.state.trip)}>
           Save
         </button>
+        <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
       </div>
     );
   }

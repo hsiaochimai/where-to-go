@@ -118,8 +118,8 @@ render(){
                 
                 </form>
 
-                <button onClick={ev => this.props.onSubmitPlace(this.state.place)}>Save</button>
-
+                {editMode ? <div><button onClick={ev => this.props.onSubmitPlace(this.state.place)}>Save</button>
+<button onClick={ev=>this.props.onCancelPlace()}>Cancel</button> </div>: null}
         </div>
     )
 }
