@@ -39,7 +39,7 @@ export default class PlaceList extends Component {
   onAddPlace = () => {
     newPlaceTemplate.trip_id = this.props.trip.id;
     this.setState({
-      newPlace: newPlaceTemplate,
+      newPlace: {...newPlaceTemplate},
       editModeIndex: 0
     });
     
@@ -54,11 +54,15 @@ export default class PlaceList extends Component {
   };
   onCancelPlace=()=>{
     this.setState({
-      editModeIndex: null
+      editModeIndex: false,
+      newPlace:null
     });
   }
+//   componentDidUpdate() {
+//    this.props.loadData()
+// }
   render() {
-    // console.log(this.props)
+   
     const trip = this.props.trip;
     if (!trip) {
       return null;
@@ -67,6 +71,7 @@ export default class PlaceList extends Component {
     if (this.state.newPlace) {
       tripPlaces.unshift(this.state.newPlace);
     }
+    console.log(tripPlaces)
     const placeCard = tripPlaces.map((place, index) => {
       const isEditing = this.state.editModeIndex === index;
       const card = (

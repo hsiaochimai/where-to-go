@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TripSearchBar from "./TripSearchBar";
 import { checkLoginAndRedirect } from "../../helpers";
 import ds from "../../STORE/dataService";
 import whereToGoContext from "../whereToGoContext/whereToGoContext";
@@ -59,7 +58,7 @@ cancelButton=()=>{
     const selectedTrip = trips.find(t => t.id === this.state.selectedTripID);
     console.log(`hello trip selected`, selectedTrip);
     const editModeClass = this.state.editMode === true ? "hide" : "";
-    console.log(this.state);
+  
     return (
         
       <div className="tab-page">
@@ -96,15 +95,12 @@ cancelButton=()=>{
 </div>
 
           {!this.state.selectedTripID ? null : (
-            <PlaceList trip={selectedTrip} />
+            <PlaceList trip={selectedTrip} loadData={this.loadData}/>
           )}
 </div>
 
 
-          {/* <TripSearchBar
-            onSaveTrip={this.onSaveTrip}
-            trips={this.context.trips}
-          /> */}
+         
         </div>
         </div>
       

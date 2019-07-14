@@ -22,9 +22,7 @@ onChange = (fieldName, value) => {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
- componentDidMount(){
 
- }
 render(){
    
     const {
