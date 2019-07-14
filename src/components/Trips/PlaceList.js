@@ -6,7 +6,7 @@ import EditPlace from "../EditPlace/EditPlace";
 import "./PlaceList.css";
 import pt from "prop-types";
 // import whereToGoContext from '../whereToGoContext/whereToGoContext'
-const { deletePlace, savePlace } = ds;
+const { deletePlace, savePlace,getTrips } = ds;
 const newPlaceTemplate = {
   id: -1,
   name: "",
@@ -28,7 +28,7 @@ export default class PlaceList extends Component {
       editModeIndex: null,
       newPlace: null
     };
-    this.placeListRefs = []
+    // this.placeListRefs = []
   }
   toggleeditModeIndex = index => {
     const { editModeIndex } = this.state;
@@ -45,7 +45,27 @@ export default class PlaceList extends Component {
     });
     
   };
-  
+  loadData = async () => {
+    try {
+      const trips = await getTrips();
+      this.context.set({ trips });
+      // success toast
+    } catch (e) {
+      //error toast
+    }
+  };
+  onDeletePlace=async id=>{
+await deletePlace(id)
+this.loadData()
+  }
+  onSubmitPlace= async place=>{
+await savePlace(place);
+this.loadData()
+this.setState({
+  editModeIndex:null,
+  newPlace:null
+})
+  }
   cancelAddPlace=()=>{
     const trip = this.props.trip;
     const tripPlaces = trip.places;
@@ -84,15 +104,17 @@ tripPlaces.splice(newTrip, 1)
             <button onClick={() => this.toggleeditModeIndex(index)}>
               Edit
             </button>
-            <button onClick={() => deletePlace(place.id)}>Delete</button>
+            <button onClick={() => this.onDeletePlace(place.id)}>Delete</button>
           </div>
           <div className="cardContent padded">
             <EditPlace
               place={place}
               editMode={isEditing}
-              ref={(r) => this.placeListRefs[index] = r}
+              onSubmitPlace={this.onSubmitPlace}
+              cancelAddPlace={this.cancelAddPlace}
+              // ref={(r) => this.placeListRefs[index] = r}
             />
-            <button onClick={() => {
+            {/* <button onClick={() => {
 
 if (!this.placeListRefs[index]) {
     return
@@ -103,7 +125,7 @@ this.placeListRefs[index].savePlace()
     .finally(() => { })
 }}
 className={`saveButton flexed `} >Save</button>
-<button onClick={() => this.cancelAddPlace()} className={`cancelButton flexed `}>Cancel</button>
+<button onClick={() => this.cancelAddPlace()} className={`cancelButton flexed `}>Cancel</button> */}
           </div>
         </div>
       );

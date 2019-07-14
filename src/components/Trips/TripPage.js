@@ -22,6 +22,7 @@ export default class TripPage extends Component {
   onSaveTrip = async trip => {
     await ds.saveTrip(trip);
     this.loadData();
+    this.setState({editMode:false})
   };
 cancelButton=()=>{
   this.setState({editMode:false})
@@ -98,7 +99,7 @@ cancelButton=()=>{
           {!this.state.selectedTripID ? null : (
             <>
             <button onClick={ev=>{this.placeListRef && this.placeListRef.addPlace()}}>Add Place</button>
-            <PlaceList ref={ref => this.placeListRef = ref} trip={selectedTrip} loadData={this.loadData}/></>
+            <PlaceList ref={ref => this.placeListRef = ref} trip={selectedTrip} loadData={this.loadData} /></>
           )}
 </div>
 
