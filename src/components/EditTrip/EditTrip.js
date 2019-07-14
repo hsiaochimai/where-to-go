@@ -10,11 +10,41 @@ export default class EditTrip extends Component {
     super(props);
     const { trip } = this.props;
     this.state = {
-      trip: { ...trip }
+      trip: { ...trip },
+      validationMessages:{
+        name: null,
+        numOfDays:null
+      }
     };
   }
+  validateField = (fieldName, value) => {
 
+
+    switch (fieldName) {
+      case "name":
+        if (value === '')
+          this.setState({
+            validationMessages: {
+              name: 'name can not be empty'
+            }
+          })
+        break;
+      case "numOfDays":
+        if(value=== '')
+        this.setState({
+          validationMessages: {
+            numOfDays: 'you must type a number'
+          }
+        })
+        //TODO setState with proper validation messages
+        break;
+
+      default:
+        break;
+    }
+  };
   onChange = (fieldName, value) => {
+    this.validateField(fieldName, value);
     const changedTrip = { ...this.state.trip, [fieldName]: value };
     this.setState({ trip: changedTrip }, () => {
       console.log("state changed:", JSON.stringify(this.state.trip, 2, 2));
@@ -50,7 +80,7 @@ export default class EditTrip extends Component {
             />
           
         </form>
-        <button onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+        <button  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
           Save
         </button>
         <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
