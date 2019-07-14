@@ -28,6 +28,7 @@ export default class PlaceList extends Component {
       editModeIndex: null,
       newPlace: null
     };
+    this.placeListRefs = []
   }
   toggleeditModeIndex = index => {
     const { editModeIndex } = this.state;
@@ -36,7 +37,7 @@ export default class PlaceList extends Component {
       editModeIndex: editModeIndex === index ? -1 : index
     });
   };
-  onAddPlace = () => {
+  addPlace = () => {
     newPlaceTemplate.trip_id = this.props.trip.id;
     this.setState({
       newPlace: {...newPlaceTemplate},
@@ -44,19 +45,23 @@ export default class PlaceList extends Component {
     });
     
   };
-  onSubmitPlace = async place => {
-    await savePlace(place);
-    this.setState({
-      editModeIndex: null,
-      newPlace: null
-    });
-    
-  };
-  onCancelPlace=()=>{
+  
+  cancelAddPlace=()=>{
+    const trip = this.props.trip;
+    const tripPlaces = trip.places;
+   const newTrip= tripPlaces.findIndex(p=>p.id===-1)
+   console.log(newTrip)
+   if(newTrip>=0){
+// tripPlaces.splice(newTrip, 1)
+tripPlaces.splice(newTrip, 1)
+
+    }
+   
     this.setState({
       editModeIndex: false,
       newPlace:null
     });
+   
   }
 //   componentDidUpdate() {
 //    this.props.loadData()
@@ -71,7 +76,6 @@ export default class PlaceList extends Component {
     if (this.state.newPlace) {
       tripPlaces.unshift(this.state.newPlace);
     }
-    console.log(tripPlaces)
     const placeCard = tripPlaces.map((place, index) => {
       const isEditing = this.state.editModeIndex === index;
       const card = (
@@ -86,9 +90,20 @@ export default class PlaceList extends Component {
             <EditPlace
               place={place}
               editMode={isEditing}
-              onSubmitPlace={this.onSubmitPlace}
-              onCancelPlace={this.onCancelPlace}
+              ref={(r) => this.placeListRefs[index] = r}
             />
+            <button onClick={() => {
+
+if (!this.placeListRefs[index]) {
+    return
+}
+this.placeListRefs[index].savePlace()
+    .then(() => { })
+    .catch(() => { })
+    .finally(() => { })
+}}
+className={`saveButton flexed `} >Save</button>
+<button onClick={() => this.cancelAddPlace()} className={`cancelButton flexed `}>Cancel</button>
           </div>
         </div>
       );
@@ -97,7 +112,7 @@ export default class PlaceList extends Component {
     });
     return (
       <div className="placeList">
-        <button onClick={() => this.onAddPlace()}>Add Place</button>
+        
         {placeCard}
       </div>
     );

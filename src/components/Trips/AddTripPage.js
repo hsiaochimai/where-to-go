@@ -21,7 +21,9 @@ export default class AddTripPage extends Component {
     await ds.saveTrip(trip);
     this.props.history.push("/dashboard")
   };
-
+  cancelButton= ()=>{
+    this.props.history.push("/home")
+  }
   componentDidMount = async () => {
     //if not logged in then redirect to login
     if (!(await checkLoginAndRedirect(this.props.history))) {
@@ -42,7 +44,8 @@ export default class AddTripPage extends Component {
         <h2>Add Trip</h2>
         <EditTrip 
               onSaveTrip={this.onSaveTrip}
-              trip={defaultTrip}/>
+              trip={defaultTrip}
+              cancelButton={this.cancelButton}/>
       </div>
       </div>
       </>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
-
+import ds from '../../STORE/dataService'
+const {savePlace} =ds
 export default class EditPlace extends Component{
     constructor(props) {
         super(props);
@@ -22,7 +23,12 @@ onChange = (fieldName, value) => {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
-
+  savePlace = async () => {
+    const place={...this.state.place}
+    await savePlace(place);
+  ;
+    
+  };
 render(){
    
     const {
@@ -116,8 +122,8 @@ render(){
                 
                 </form>
 
-                {editMode ? <div><button onClick={ev => this.props.onSubmitPlace(this.state.place)}>Save</button>
-<button onClick={ev=>this.props.onCancelPlace()}>Cancel</button> </div>: null}
+                {/* {editMode ? <div><button onClick={ev => this.props.onSubmitPlace(this.state.place)}>Save</button>
+<button onClick={ev=>this.props.onCancelPlace()}>Cancel</button> </div>: null} */}
         </div>
     )
 }

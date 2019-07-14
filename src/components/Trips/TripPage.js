@@ -17,6 +17,7 @@ export default class TripPage extends Component {
       editMode: false,
       selectedPlaceID: null
     };
+    this.placeListRef = null
   }
   onSaveTrip = async trip => {
     await ds.saveTrip(trip);
@@ -95,7 +96,9 @@ cancelButton=()=>{
 </div>
 
           {!this.state.selectedTripID ? null : (
-            <PlaceList trip={selectedTrip} loadData={this.loadData}/>
+            <>
+            <button onClick={ev=>{this.placeListRef && this.placeListRef.addPlace()}}>Add Place</button>
+            <PlaceList ref={ref => this.placeListRef = ref} trip={selectedTrip} loadData={this.loadData}/></>
           )}
 </div>
 
