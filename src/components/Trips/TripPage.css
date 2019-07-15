@@ -1,6 +1,7 @@
 .trip-page-container{
     display:flex;
     flex-direction: column;
+    height:100vh;
 }
 .largeTripList{
 background-color: #60992D;
