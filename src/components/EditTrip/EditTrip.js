@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import pt from "prop-types";
+import ValidationErrors from '../ValidationErrors/ValidationErrors'
 export default class EditTrip extends Component {
   static propTypes = {
     onSaveTrip: pt.func.isRequired,
@@ -11,6 +12,9 @@ export default class EditTrip extends Component {
     const { trip } = this.props;
     this.state = {
       trip: { ...trip },
+      tripNameValid:null,
+      numOfDaysValid: null,
+      formValid: null,
       validationMessages:{
         name: null,
         numOfDays:null
@@ -18,35 +22,60 @@ export default class EditTrip extends Component {
     };
   }
   validateField = (fieldName, value) => {
-
-
+const fieldErrors={...this.state.validationMessages}
+let hasError= false
     switch (fieldName) {
       case "name":
-        if (value === '')
+        value=value.trim()
+        if (value ===0){
+          fieldErrors.name = 'Folder name is required';
+          hasError = true;
+        }
+      
+          else{
+            if (value.length < 3) {
+              fieldErrors.name = 'Trip name must be at least 3 characters'
+              hasError = true;
+          } else {
+              fieldErrors.name = '';
+              hasError = false;
+          }
+          }
           this.setState({
-            validationMessages: {
-              name: 'name can not be empty'
-            }
-          })
+            validationMessages: fieldErrors,
+            tripNameValid: !hasError
+        }, this.formValid);
+
         break;
       case "numOfDays":
-        if(value=== '')
-        this.setState({
-          validationMessages: {
-            numOfDays: 'you must type a number'
-          }
-        })
+        if(value=== ''){
+        fieldErrors.numOfDays = 'Trip duration is required';
+          hasError = true;
+        }
+        else {
+          fieldErrors.numOfDays = '';
+          hasError = false;
+      }
+      this.setState({
+        validationMessages: fieldErrors,
+        numOfDaysValid: !hasError
+    }, this.formValid);
         //TODO setState with proper validation messages
         break;
 
       default:
         break;
     }
+    
   };
+  formValid() {
+    this.setState({
+        formValid: this.state.tripNameValid && this.state.numOfDaysValid
+    })
+}
   onChange = (fieldName, value) => {
-    this.validateField(fieldName, value);
     const changedTrip = { ...this.state.trip, [fieldName]: value };
-    this.setState({ trip: changedTrip }, () => {
+    this.setState({ trip: changedTrip }, () => {this.validateField(fieldName, value)
       console.log("state changed:", JSON.stringify(this.state.trip, 2, 2));
     });
   };
@@ -66,7 +95,8 @@ export default class EditTrip extends Component {
               initialValue={name}
               //   editMode={editMode}
             />
-         
+      <ValidationErrors hasError={!this.state.tripNameValid} message={this.state.validationMessages.name} />
+
          
             <label>Number of Days:</label>
             <ControlledInput
@@ -78,9 +108,10 @@ export default class EditTrip extends Component {
               initialValue={numOfDays}
               //   editMode={editMode}
             />
-          
+    <ValidationErrors hasError={!this.state.numOfDaysValid} message={this.state.validationMessages.numOfDays} />
+
         </form>
-        <button  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+        <button disabled={!this.state.formValid}  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
           Save
         </button>
         <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
