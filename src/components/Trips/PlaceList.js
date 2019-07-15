@@ -6,7 +6,7 @@ import EditPlace from "../EditPlace/EditPlace";
 import "./PlaceList.css";
 import pt from "prop-types";
 // import whereToGoContext from '../whereToGoContext/whereToGoContext'
-const { deletePlace, savePlace,getTrips } = ds;
+const { deletePlace, savePlace, getTrips } = ds;
 const newPlaceTemplate = {
   id: -1,
   name: "",
@@ -40,10 +40,9 @@ export default class PlaceList extends Component {
   addPlace = () => {
     newPlaceTemplate.trip_id = this.props.trip.id;
     this.setState({
-      newPlace: {...newPlaceTemplate},
+      newPlace: { ...newPlaceTemplate },
       editModeIndex: 0
     });
-    
   };
   loadData = async () => {
     try {
@@ -54,40 +53,37 @@ export default class PlaceList extends Component {
       //error toast
     }
   };
-  onDeletePlace=async id=>{
-await deletePlace(id)
-this.loadData()
-  }
-  onSubmitPlace= async place=>{
-await savePlace(place);
-this.loadData()
-this.setState({
-  editModeIndex:null,
-  newPlace:null
-})
-  }
-  cancelAddPlace=()=>{
+  onDeletePlace = async id => {
+    await deletePlace(id);
+    this.loadData();
+  };
+  onSubmitPlace = async place => {
+    await savePlace(place);
+    this.loadData();
+    this.setState({
+      editModeIndex: null,
+      newPlace: null
+    });
+  };
+  cancelAddPlace = () => {
     const trip = this.props.trip;
     const tripPlaces = trip.places;
-   const newTrip= tripPlaces.findIndex(p=>p.id===-1)
-   console.log(newTrip)
-   if(newTrip>=0){
-// tripPlaces.splice(newTrip, 1)
-tripPlaces.splice(newTrip, 1)
-
+    const newTrip = tripPlaces.findIndex(p => p.id === -1);
+    console.log(newTrip);
+    if (newTrip >= 0) {
+      // tripPlaces.splice(newTrip, 1)
+      tripPlaces.splice(newTrip, 1);
     }
-   
+
     this.setState({
       editModeIndex: false,
-      newPlace:null
+      newPlace: null
     });
-   
-  }
-//   componentDidUpdate() {
-//    this.props.loadData()
-// }
+  };
+  //   componentDidUpdate() {
+  //    this.props.loadData()
+  // }
   render() {
-   
     const trip = this.props.trip;
     if (!trip) {
       return null;
@@ -100,12 +96,16 @@ tripPlaces.splice(newTrip, 1)
       const isEditing = this.state.editModeIndex === index;
       const card = (
         <div className="placeCard">
-          <div className="action-buttons">
-            <button onClick={() => this.toggleeditModeIndex(index)}>
-              Edit
-            </button>
-            <button onClick={() => this.onDeletePlace(place.id)}>Delete</button>
-          </div>
+          {!this.state.newPlace ? (
+            <div className="action-buttons">
+              <button onClick={() => this.toggleeditModeIndex(index)}>
+                Edit
+              </button>
+              <button onClick={() => this.onDeletePlace(place.id)}>
+                Delete
+              </button>
+            </div>
+          ) : null}
           <div className="cardContent padded">
             <EditPlace
               place={place}
@@ -132,11 +132,6 @@ className={`saveButton flexed `} >Save</button>
 
       return card;
     });
-    return (
-      <div className="placeList">
-        
-        {placeCard}
-      </div>
-    );
+    return <div className="placeList">{placeCard}</div>;
   }
 }
