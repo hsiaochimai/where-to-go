@@ -1,4 +1,7 @@
-
+.trip-page-container{
+    display:flex;
+    flex-direction: column;
+}
 .largeTripList{
 background-color: #60992D;
 display:none;
@@ -6,6 +9,7 @@ display:none;
 .column50{
     background-color: #F8CBB0;
     flex:3 1 auto;
+    height:100vh;
   
 }
 
@@ -28,8 +32,17 @@ display:none;
 font-size: 1.5em;
 }
 
-@media only screen and (max-width: 700px) {
-.tripList-select{
-    display:none
-}
+@media only screen and (min-width: 700px) {
+    .trip-page-container{
+        display:flex;
+        flex-direction: row;
+    }
+    .tripList-select{
+        display: none
+    }
+    .largeTripList{
+        background-color: #60992D;
+        display:block;
+        height:100vh;
+        }
 }
