@@ -15,7 +15,7 @@ export default class EditPlace extends Component {
       cityValid: true,
       transportationValid: true,
       notesValid: true,
-      formValid: true,
+      formValid:true,
       validationMessages: {
         name: null,
         address: null,
@@ -29,6 +29,29 @@ export default class EditPlace extends Component {
     if (nextProps.place !== this.props.place) {
       this.setState({ place: nextProps.place });
     }
+    if(nextProps.place.id===-1){
+      console.log(`hello`)
+       this.setState({
+         nameValid: null,
+         addressValid: null,
+         cityValid: null,
+         transportationValid: null,
+         notesValid: null,
+         formValid:null,
+ 
+       }, ()=>{})
+     }else{
+      this.setState({
+        nameValid: true,
+        addressValid: true,
+        cityValid: true,
+        transportationValid: true,
+        notesValid: true,
+        formValid:true,
+
+      }, ()=>{})
+     }
+    
   }
   validateField = (fieldName, value) => {
     const fieldErrors = { ...this.state.validationMessages };
@@ -58,7 +81,7 @@ export default class EditPlace extends Component {
 
         break;
       case "city":
-        if (value === "") {
+        if (value === '') {
           fieldErrors.city = "City is required";
           hasError = true;
         } else {
@@ -74,24 +97,24 @@ export default class EditPlace extends Component {
         );
         //TODO setState with proper validation messages
         break;
-      case "street_address":
-        if (value === "") {
-          fieldErrors.address = "address is required";
-          hasError = true;
-        } else {
-          fieldErrors.address = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            addressValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-      case "transportation":
+        case "street_address":
+            if (value === '') {
+              fieldErrors.address = "address is required";
+              hasError = true;
+            } else {
+              fieldErrors.address = "";
+              hasError = false;
+            }
+            this.setState(
+              {
+                validationMessages: fieldErrors,
+                addressValid: !hasError
+              },
+              this.formValid
+            );
+            //TODO setState with proper validation messages
+            break;
+            case "transportation":
         if (value === 0) {
           fieldErrors.transportation = "transportation is required";
           hasError = true;
@@ -108,7 +131,7 @@ export default class EditPlace extends Component {
         );
         //TODO setState with proper validation messages
         break;
-      case "notes":
+        case "notes":
         if (value === 0) {
           fieldErrors.notes = "notes is required";
           hasError = true;
@@ -152,20 +175,24 @@ export default class EditPlace extends Component {
   // ;
 
   // };
-  componentDidMount() {
-    if (this.props.place.id === -1) {
-      this.setState({
-        nameValid: null,
-        addressValid: null,
-        cityValid: null,
-        transportationValid: null,
-        notesValid: null,
-        formValid: null
-      });
-    }
-  }
+  // componentWillReceiveProps(){
+  //   if(this.state.place.id===-1){
+  //    console.log(`hello`)
+  //     this.setState({
+  //       nameValid: null,
+  //       addressValid: null,
+  //       cityValid: null,
+  //       transportationValid: null,
+  //       notesValid: null,
+  //       formValid:null,
+
+  //     }, ()=>{})
+  //   }
+   
+  // }
   render() {
-    console.log(`editplace`, this.props.place.id);
+
+    console.log(`editplace`,this.state)
     const {
       name,
       street_address,
@@ -183,18 +210,15 @@ export default class EditPlace extends Component {
               name
             ) : (
               <>
-                <ControlledInput
-                  onChange={value => this.onChange("name", value)}
-                  tag="input"
-                  type="text"
-                  required={true}
-                  initialValue={name}
-                />
-                <ValidationErrors
-                  hasError={!this.state.nameValid}
-                  message={this.state.validationMessages.name}
-                />
-              </>
+              <ControlledInput
+                onChange={value => this.onChange("name", value)}
+                tag="input"
+                type="text"
+                required={true}
+                initialValue={name}
+              />
+              <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
+            </>
             )}
           </div>
           <div>
@@ -203,18 +227,15 @@ export default class EditPlace extends Component {
               street_address
             ) : (
               <>
-                <ControlledInput
-                  onChange={value => this.onChange("street_address", value)}
-                  tag="input"
-                  type="text"
-                  required={true}
-                  initialValue={street_address}
-                />
-                <ValidationErrors
-                  hasError={!this.state.addressValid}
-                  message={this.state.validationMessages.address}
-                />
-              </>
+              <ControlledInput
+                onChange={value => this.onChange("street_address", value)}
+                tag="input"
+                type="text"
+                required={true}
+                initialValue={street_address}
+              />
+              <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
+            </>
             )}
           </div>
           <div>
@@ -223,18 +244,15 @@ export default class EditPlace extends Component {
               city
             ) : (
               <>
-                <ControlledInput
-                  onChange={value => this.onChange("city", value)}
-                  tag="input"
-                  type="text"
-                  required={true}
-                  initialValue={city}
-                />
-                <ValidationErrors
-                  hasError={!this.state.cityValid}
-                  message={this.state.validationMessages.city}
-                />
-              </>
+              <ControlledInput
+                onChange={value => this.onChange("city", value)}
+                tag="input"
+                type="text"
+                required={true}
+                initialValue={city}
+              />
+              <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
+            </>
             )}
           </div>
           <div>
@@ -243,18 +261,15 @@ export default class EditPlace extends Component {
               transportation
             ) : (
               <>
-                <ControlledInput
-                  onChange={value => this.onChange("transportation", value)}
-                  tag="input"
-                  type="text"
-                  required={true}
-                  initialValue={transportation}
-                />
-                <ValidationErrors
-                  hasError={!this.state.transportationValid}
-                  message={this.state.validationMessages.transporation}
-                />
-              </>
+              <ControlledInput
+                onChange={value => this.onChange("transportation", value)}
+                tag="input"
+                type="text"
+                required={true}
+                initialValue={transportation}
+              />
+              <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transporation} />
+            </>
             )}
           </div>
           <div>
@@ -263,28 +278,22 @@ export default class EditPlace extends Component {
               notes
             ) : (
               <>
-                <ControlledInput
-                  onChange={value => this.onChange("notes", value)}
-                  tag="textarea"
-                  type="text"
-                  required={true}
-                  initialValue={notes}
-                />
-                <ValidationErrors
-                  hasError={!this.state.notesValid}
-                  message={this.state.validationMessages.notes}
-                />
-              </>
+              <ControlledInput
+                onChange={value => this.onChange("notes", value)}
+                tag="textarea"
+                type="text"
+                required={true}
+                initialValue={notes}
+              />
+              <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
+            </>
             )}
           </div>
         </form>
 
         {editMode ? (
           <div>
-            <button
-              disabled={!this.state.formValid}
-              onClick={ev => this.props.onSubmitPlace(this.state.place)}
-            >
+            <button disabled={!this.state.formValid} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
               Save
             </button>
             <button onClick={ev => this.props.cancelAddPlace()}>Cancel</button>{" "}
