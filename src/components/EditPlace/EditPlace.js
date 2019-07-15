@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import ValidationErrors from "../ValidationErrors/ValidationErrors";
 import ds from "../../STORE/dataService";
+import './EditPlace.css'
 const { savePlace } = ds;
 export default class EditPlace extends Component {
   constructor(props) {
@@ -169,27 +170,7 @@ export default class EditPlace extends Component {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
-  // savePlace = async () => {
-  //   const place={...this.state.place}
-  //   await savePlace(place);
-  // ;
-
-  // };
-  // componentWillReceiveProps(){
-  //   if(this.state.place.id===-1){
-  //    console.log(`hello`)
-  //     this.setState({
-  //       nameValid: null,
-  //       addressValid: null,
-  //       cityValid: null,
-  //       transportationValid: null,
-  //       notesValid: null,
-  //       formValid:null,
-
-  //     }, ()=>{})
-  //   }
-   
-  // }
+ 
   render() {
 
     console.log(`editplace`,this.state)
@@ -205,7 +186,8 @@ export default class EditPlace extends Component {
       <div className="cardContent padded">
         <form>
           <div>
-            <span className="padded">Name</span>
+          <p>
+            <span className="">Name</span>
             {!editMode ? (
               name
             ) : (
@@ -220,9 +202,11 @@ export default class EditPlace extends Component {
               <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
             </>
             )}
+            </p>
           </div>
           <div>
-            <span className="padded">Address</span>
+            <p>
+            <span className="">Address</span>
             {!editMode ? (
               street_address
             ) : (
@@ -237,11 +221,13 @@ export default class EditPlace extends Component {
               <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
             </>
             )}
+            </p>
           </div>
           <div>
-            <span className="padded">City</span>
+            <p>
+            <span className="">City</span>
             {!editMode ? (
-              city
+             city
             ) : (
               <>
               <ControlledInput
@@ -254,11 +240,13 @@ export default class EditPlace extends Component {
               <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
             </>
             )}
+            </p>
           </div>
           <div>
-            <span className="padded">Transportation</span>
+            <p>
+            <span className="">Transportation</span>
             {!editMode ? (
-              transportation
+             transportation 
             ) : (
               <>
               <ControlledInput
@@ -271,11 +259,13 @@ export default class EditPlace extends Component {
               <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transporation} />
             </>
             )}
+            </p>
           </div>
           <div>
-            <span className="padded">Notes</span>
+            <p>
+            <span className="">Notes</span>
             {!editMode ? (
-              notes
+          notes
             ) : (
               <>
               <ControlledInput
@@ -288,6 +278,7 @@ export default class EditPlace extends Component {
               <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
             </>
             )}
+            </p>
           </div>
         </form>
 
