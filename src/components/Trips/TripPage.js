@@ -65,7 +65,7 @@ cancelButton=()=>{
         
       <div className="tab-page">
           <NavBar/>
-        <div className="trip-page-container  flex-row">
+        <div className="trip-page-container flex-column  ">
           <TripList trips={trips} onTripSelected={this.onTripSelected}/>
 
 
