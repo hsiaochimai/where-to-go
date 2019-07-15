@@ -96,7 +96,7 @@ export default class PlaceList extends Component {
       const isEditing = this.state.editModeIndex === index;
       const editingModeClassName = isEditing ? 'hide' : ''
       const card = (
-        <div className="placeCard">
+        <div key={index} className="placeCard">
           {!this.state.newPlace ? (
             <div className="action-buttons">
               <button className={editingModeClassName} onClick={() => this.toggleeditModeIndex(index)}>
@@ -107,7 +107,7 @@ export default class PlaceList extends Component {
               </button>
             </div>
           ) : null}
-          <div className="cardContent padded">
+          <div  className="cardContent padded">
             <EditPlace
               place={place}
               editMode={isEditing}
