@@ -12,9 +12,9 @@ export default class EditTrip extends Component {
     const { trip } = this.props;
     this.state = {
       trip: { ...trip },
-      tripNameValid:null,
-      numOfDaysValid: null,
-      formValid: null,
+      tripNameValid:true,
+      numOfDaysValid: true,
+      formValid: true,
       validationMessages:{
         name: null,
         numOfDays:null
@@ -28,7 +28,7 @@ let hasError= false
       case "name":
         value=value.trim()
         if (value ===0){
-          fieldErrors.name = 'Folder name is required';
+          fieldErrors.name = 'Trip name is required';
           hasError = true;
         }
       
@@ -79,7 +79,18 @@ let hasError= false
       console.log("state changed:", JSON.stringify(this.state.trip, 2, 2));
     });
   };
+  componentDidMount(){
+    if(this.props.trip.id===-1){
+      this.setState({
+        tripNameValid:null,
+      numOfDaysValid: null,
+      formValid: null,
+
+      })
+    }
+  }
   render() {
+
     console.log(`edit trip`, this.state);
     const { name, numOfDays } = this.state.trip;
 
