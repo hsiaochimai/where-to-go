@@ -30,7 +30,7 @@ export default class EditPlace extends Component {
     if (nextProps.place !== this.props.place) {
       this.setState({ place: nextProps.place });
     }
-    if(nextProps.place.id===-1){
+    if(nextProps.place.id  || this.props.place.id ===-1){
       console.log(`hello`)
        this.setState({
          nameValid: null,
@@ -173,7 +173,7 @@ export default class EditPlace extends Component {
  
   render() {
 
-    console.log(`editplace`,this.state)
+    console.log(`editplace`,this.props)
     const {
       name,
       street_address,

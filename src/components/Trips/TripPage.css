@@ -1,7 +1,7 @@
 .trip-page-container{
     display:flex;
     flex-direction: column;
-    height: auto;
+    height:100vh;
 }
 .largeTripList{
 background-color: #60992D;
@@ -44,7 +44,8 @@ font-size: 1.5em;
     .trip-page-container{
         display:flex;
         flex-direction: row;
-        background-color: #60992D
+        background-color: #60992D;
+        height: auto;
     }
     .tripList-select{
         display: none
