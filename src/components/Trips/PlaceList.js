@@ -94,20 +94,26 @@ export default class PlaceList extends Component {
     }
     const placeCard = tripPlaces.map((place, index) => {
       const isEditing = this.state.editModeIndex === index;
-      const editingModeClassName = isEditing ? 'hide' : ''
+      const editingModeClassName = isEditing ? "hide" : "";
       const card = (
         <div key={index} className="placeCard">
           {!this.state.newPlace ? (
             <div className="action-buttons">
-              <button className={editingModeClassName} onClick={() => this.toggleeditModeIndex(index)}>
+              <button
+                className={editingModeClassName}
+                onClick={() => this.toggleeditModeIndex(index)}
+              >
                 Edit
               </button>
-              <button className={editingModeClassName} onClick={() => this.onDeletePlace(place.id)}>
+              <button
+                className={editingModeClassName}
+                onClick={() => this.onDeletePlace(place.id)}
+              >
                 Delete
               </button>
             </div>
           ) : null}
-          <div  className="cardContent padded">
+          <div className="cardContent padded">
             <EditPlace
               place={place}
               editMode={isEditing}
@@ -133,6 +139,10 @@ className={`saveButton flexed `} >Save</button>
 
       return card;
     });
-    return <div className="placeList">{placeCard}</div>;
+    return (
+    <div className="placeList">
+      <button disabled={this.state.newPlace} onClick={()=>this.addPlace()}>Add Place</button>
+    {placeCard}
+    </div>);
   }
 }

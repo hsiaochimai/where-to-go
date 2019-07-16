@@ -98,7 +98,7 @@ cancelButton=()=>{
 
           {!this.state.selectedTripID ? null : (
             <>
-            <button onClick={ev=>{this.placeListRef && this.placeListRef.addPlace()}}>Add Place</button>
+            {/* <button onClick={ev=>{this.placeListRef && this.placeListRef.addPlace()}}>Add Place</button> */}
             <PlaceList ref={ref => this.placeListRef = ref} trip={selectedTrip} loadData={this.loadData} /></>
           )}
 </div>
