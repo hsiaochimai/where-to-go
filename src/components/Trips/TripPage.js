@@ -89,7 +89,7 @@ cancelButton=()=>{
           <h2 className={`barTitle padded ${editModeClass}`}>
             {!selectedTrip
               ? null
-              : `Duration of stay: ${selectedTrip.numOfDays} days`}
+              : `Number of Days: ${selectedTrip.numOfDays} days`}
           </h2>
           
           {this.state.editMode ? (
