@@ -256,7 +256,7 @@ export default class EditPlace extends Component {
                 required={true}
                 initialValue={transportation}
               />
-              <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transporation} />
+              <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transportation} />
             </>
             )}
             </p>

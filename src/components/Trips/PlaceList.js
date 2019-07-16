@@ -141,7 +141,7 @@ className={`saveButton flexed `} >Save</button>
     });
     return (
     <div className="placeList">
-      <button disabled={this.state.newPlace} onClick={()=>this.addPlace()}>Add Place</button>
+      <button className='addPlace' disabled={this.state.newPlace} onClick={()=>this.addPlace()}>Add Place</button>
     {placeCard}
     </div>);
   }

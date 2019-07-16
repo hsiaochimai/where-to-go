@@ -96,6 +96,13 @@ let hasError= false
 
     return (
       <div className='edit-trip'>
+        <div className='action-buttons' >
+        <button disabled={!this.state.formValid}  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+          Save
+        </button>
+        <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
+        </div>
+
         <form className='edit-trip-form flex-column'>
             <label>Trip name:</label>
             <ControlledInput
@@ -122,10 +129,13 @@ let hasError= false
     <ValidationErrors hasError={!this.state.numOfDaysValid} message={this.state.validationMessages.numOfDays} />
 
         </form>
+        {/* <div className='action-buttons' >
         <button disabled={!this.state.formValid}  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
           Save
         </button>
         <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
+        </div> */}
+
       </div>
     );
   }

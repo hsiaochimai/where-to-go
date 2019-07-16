@@ -60,7 +60,7 @@ cancelButton=()=>{
     const selectedTrip = trips.find(t => t.id === this.state.selectedTripID);
     console.log(`hello trip selected`, selectedTrip);
     const editModeClass = this.state.editMode === true ? "hide" : "";
-  
+ 
     return (
         
       <div className="tab-page">
@@ -70,10 +70,21 @@ cancelButton=()=>{
 
 
        <div className='column50'>
-         <div className='title-container flex-row'>
+         <div className='title-container'>
+         {!selectedTrip || this.state.editMode ? null : (
+            <div className={`action-buttons  ${editModeClass}`}>
+              <button onClick={() => this.onEdit()}>Edit</button>
+              <button onClick={() => deleteTrip(selectedTrip.id)}>
+                Delete
+              </button>
+            </div>
+          )}
          <div className='title'>
+           <div className={`welcome ${selectedTrip ? "hide" : ''}`}> 
+        <h2>Please Select a trip</h2>
+          </div>
           <h2 className={`barTitle padded ${editModeClass}`}>
-            {!selectedTrip ? "Please select" : selectedTrip.name}
+            {!selectedTrip ? null: selectedTrip.name}
           </h2>
           <h2 className={`barTitle padded ${editModeClass}`}>
             {!selectedTrip
@@ -86,14 +97,14 @@ cancelButton=()=>{
           ) : null}
           </div>
 
-          {!selectedTrip  ? null : (
+          {/* {!selectedTrip  ? null : (
             <div className={`action-buttons  ${editModeClass}`}>
               <button onClick={() => this.onEdit()}>Edit</button>
               <button onClick={() => deleteTrip(selectedTrip.id)}>
                 Delete
               </button>
             </div>
-          )}
+          )} */}
 </div>
 
           {!this.state.selectedTripID ? null : (

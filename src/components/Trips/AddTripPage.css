@@ -10,19 +10,20 @@ background-color: #F8CBB0;
     /* height: 75vh; */
     /* width:75%; */
     max-width: 400px;
-background: rgba(0,0,0, 0.5);
+background: #C4B7CB;
     border-radius: .5em;
 }
 .addTripPage h2{
     margin-top: 5%;
     text-align: center;
     font-size:2em;
-    color:white;
+    color:black;
+    margin-bottom: 5%;
 }
 .edit-trip-form{
     margin: auto;
-    color:white;
-    
+    color:black;
+    width:100%;
 }
 .edit-trip-form label{
 font-size: 18px;

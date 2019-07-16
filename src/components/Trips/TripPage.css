@@ -10,7 +10,7 @@ display:none;
 .column50{
     background-color: #F8CBB0;
     flex:3 1 auto;
-    height:100vh;
+    height:auto;
   
 }
 
@@ -27,12 +27,19 @@ display:none;
     margin-left: 1em;
 }
 .title{
-    flex:2
+    flex:2;
+    background-color:#C4B7CB;
 }
 .title h2{
 font-size: 1.5em;
 }
-
+.welcome{
+    height:100vh
+}
+.addPlace {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 @media only screen and (min-width: 700px) {
     .trip-page-container{
         display:flex;
