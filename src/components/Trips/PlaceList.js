@@ -103,12 +103,14 @@ export default class PlaceList extends Component {
                 className={editingModeClassName}
                 onClick={() => this.toggleeditModeIndex(index)}
               >
+                 <Icon icon="edit" /> 
                 Edit
               </button>
               <button
                 className={editingModeClassName}
                 onClick={() => this.onDeletePlace(place.id)}
               >
+                 <Icon icon="trash" /> 
                 Delete
               </button>
             </div>
@@ -141,7 +143,7 @@ className={`saveButton flexed `} >Save</button>
     });
     return (
     <div className="placeList">
-      <button className='addPlace' disabled={this.state.newPlace} onClick={()=>this.addPlace()}>Add Place</button>
+      <button className='addPlace' disabled={this.state.newPlace} onClick={()=>this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
     {placeCard}
     </div>);
   }

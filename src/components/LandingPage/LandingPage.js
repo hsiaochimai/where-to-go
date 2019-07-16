@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { BrowserRouter, Link } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import './LandingPage.css'
 export default class LandingPage extends Component{
     render(){
@@ -12,7 +13,7 @@ export default class LandingPage extends Component{
                 <h1 >Welcome to Where To Go!</h1>
           <p >Get started by adding a new trip!</p>
           
-         <Link to='/add-trip'> <button>Add Trip</button></Link>
+         <Link to='/add-trip'> <button>  <Icon icon="suitcase" /> Add Trip</button></Link>
         
          </div>
         

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import pt from "prop-types";
 import ValidationErrors from '../ValidationErrors/ValidationErrors'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 export default class EditTrip extends Component {
   static propTypes = {
     onSaveTrip: pt.func.isRequired,
@@ -98,9 +99,10 @@ let hasError= false
       <div className='edit-trip'>
         <div className='action-buttons' >
         <button disabled={!this.state.formValid}  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
+        <Icon icon="save" /> 
           Save
         </button>
-        <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
+        <button onClick={ev=>this.props.cancelButton()}>  <Icon icon="window-close" /> Cancel</button>
         </div>
 
         <form className='edit-trip-form flex-column'>

@@ -5,6 +5,7 @@ import whereToGoContext from "../whereToGoContext/whereToGoContext";
 import TripList from "../TripList/TripList";
 import PlaceList from "./PlaceList";
 import EditTrip from "../EditTrip/EditTrip";
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import "./TripPage.css";
 import NavBar from "../NavBar/NavBar";
 const { deleteTrip } = ds;
@@ -73,8 +74,9 @@ cancelButton=()=>{
          <div className='title-container'>
          {!selectedTrip || this.state.editMode ? null : (
             <div className={`action-buttons  ${editModeClass}`}>
-              <button onClick={() => this.onEdit()}>Edit</button>
+              <button onClick={() => this.onEdit()}> <Icon icon="edit" /> Edit</button>
               <button onClick={() => deleteTrip(selectedTrip.id)}>
+              <Icon icon="trash" /> 
                 Delete
               </button>
             </div>

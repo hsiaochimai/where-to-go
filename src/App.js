@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import LoginPage from './components/LoginPage/LoginPage'
+import { 
+  faMapMarkedAlt,  faEdit,   faSave,  faTrash,
+   faSuitcase, faWindowClose
+} from '@fortawesome/free-solid-svg-icons';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import whereToGoContext from './components/whereToGoContext/whereToGoContext'
@@ -8,6 +13,11 @@ import LandingPage from './components/LandingPage/LandingPage';
 import NavBar from './components/NavBar/NavBar';
 import AddTripPage from './components/Trips/AddTripPage';
 import TripPage from './components/Trips/TripPage';
+
+library.add(
+  faEdit,   faSave,  faTrash, 
+ faMapMarkedAlt, faSuitcase, faWindowClose
+)
 class App extends Component {
   state = {
     user: null,
