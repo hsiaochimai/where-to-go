@@ -31,6 +31,11 @@ export default class TripPage extends Component {
     this.loadData();
   };
 
+  onSavePlace = async place => {
+    await ds.savePlace(place);
+    this.loadData();
+  };
+
   cancelButton = () => {
     this.setState({ editMode: false })
   }
@@ -122,7 +127,9 @@ export default class TripPage extends Component {
                   key={selectedTrip.id}
                   ref={ref => this.placeListRef = ref}
                   trip={selectedTrip}
-                  onDeletePlace={this.onDeletePlace} /></>
+                  onDeletePlace={this.onDeletePlace} 
+                  onSavePlace={this.onSavePlace} 
+                  /></>
             )}
           </div>
 

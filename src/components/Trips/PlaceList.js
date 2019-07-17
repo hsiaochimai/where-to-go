@@ -5,8 +5,6 @@ import ds from "../../STORE/dataService";
 import EditPlace from "../EditPlace/EditPlace";
 import "./PlaceList.css";
 import pt from "prop-types";
-// import whereToGoContext from '../whereToGoContext/whereToGoContext'
-const { deletePlace, savePlace, getTrips } = ds;
 const newPlaceTemplate = {
   id: -1,
   name: "",
@@ -20,6 +18,8 @@ const newPlaceTemplate = {
 export default class PlaceList extends Component {
   // static contextType= whereToGoContext
   static propTypes = {
+    onDeletePlace: pt.func.isRequired,
+    onSavePlace: pt.func.isRequired,
     trip: pt.object //a trip object with associated places
   };
   constructor(props) {
@@ -60,8 +60,8 @@ export default class PlaceList extends Component {
     }
   };
   onSubmitPlace = async place => {
-    await savePlace(place);
-    this.loadData();
+    // TODO try..catch and toasts
+    await this.props.onSavePlace(place);
     this.setState({
       editModeIndex: null,
       newPlace: null
@@ -82,9 +82,7 @@ export default class PlaceList extends Component {
       newPlace: null
     });
   };
-  //   componentDidUpdate() {
-  //    this.props.loadData()
-  // }
+
   render() {
     const trip = this.props.trip;
     if (!trip) {
