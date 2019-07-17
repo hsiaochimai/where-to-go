@@ -30,4 +30,4 @@ send auth JWT token
 
 /api/trip/:id/updateplace/:placeID
 
-RE/api/trip/:id/removeplace/:placeID
+/api/trip/:id/removeplace/:placeID
