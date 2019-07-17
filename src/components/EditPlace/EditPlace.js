@@ -4,193 +4,89 @@ import ValidationErrors from "../ValidationErrors/ValidationErrors";
 import ds from "../../STORE/dataService";
 import './EditPlace.css'
 const { savePlace } = ds;
+
+const defaultState = {
+  changedFields: [],
+}
+
 export default class EditPlace extends Component {
   constructor(props) {
     super(props);
     const { place } = this.props;
 
     this.state = {
-      pristineForm: true,
       place: { ...place },
-      nameValid: true,
-      addressValid: true,
-      cityValid: true,
-      transportationValid: true,
-      notesValid: true,
-      formValid: false,
-      validationMessages: {
-        name: null,
-        address: null,
-        city: null,
-        transportation: null,
-        notes: null
-      }
+      ...defaultState
     };
   }
 
-  componentDidMount() {
-    const { place } = this.state
-    // Object.keys(place).forEach(k=>{})
-    for (let key in place) {
-      console.log(`validate ${key}, ${place[key]}`)
-      this.validateField(key, place[key])
-    }
-  }
 
   componentWillReceiveProps(nextProps) {
     console.log(`componentWillReceiveProps`)
-    return
-
-    if (nextProps.place !== this.props.place) {
-      this.setState({ place: nextProps.place });
-    }
-    if (nextProps.place.id || this.props.place.id === -1) {
-      console.log(`hello`)
-      this.setState({
-        nameValid: null,
-        addressValid: null,
-        cityValid: null,
-        transportationValid: null,
-        notesValid: null,
-        formValid: null,
-
-      }, () => { })
-    } else {
-      this.setState({
-        nameValid: true,
-        addressValid: true,
-        cityValid: true,
-        transportationValid: true,
-        notesValid: true,
-        formValid: true,
-
-      }, () => { })
-    }
-
+    this.setState({
+      place: { ...nextProps.place },
+      ...defaultState
+    })
   }
-  validateField = (fieldName, value) => {
-    const fieldErrors = { ...this.state.validationMessages };
-    let hasError = false;
-    console.log(fieldName, value);
+
+  /**
+   * returns a message or null if the value is valid
+   */
+  _validateField = (fieldName, value) => {
+    let msg = null
     typeof value === "string" && (value = value.trim());
     switch (fieldName) {
       case "name":
-        if (value === 0) {
-          fieldErrors.name = "Place name is required";
-          hasError = true;
+        if (!value) {
+          msg = "Place name is required";
         } else {
           if (value.length < 3) {
-            fieldErrors.name = "Place name must be at least 3 characters";
-            hasError = true;
-          } else {
-            fieldErrors.name = "";
-            hasError = false;
+            msg = "Place name must be at least 3 characters";
           }
         }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            nameValid: !hasError
-          },
-          this.formValid
-        );
-
-        break;
-      case "city":
-        if (value === '') {
-          fieldErrors.city = "City is required";
-          hasError = true;
-        } else {
-          fieldErrors.city = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            cityValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-      case "street_address":
-        if (value === '') {
-          fieldErrors.address = "address is required";
-          hasError = true;
-        } else {
-          fieldErrors.address = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            addressValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-      case "transportation":
-        if (!value) {
-          fieldErrors.transportation = "transportation is required";
-          hasError = true;
-        } else {
-          fieldErrors.transportation = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            transportationValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
         break;
       case "notes":
+      case "city":
+      case "transportation":
+      case "street_address":
         if (!value) {
-          fieldErrors.notes = "notes is required";
-          hasError = true;
-        } else {
-          fieldErrors.notes = "";
-          hasError = false;
+          msg = "This field is required";
         }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            notesValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-      default:
-        break;
+
     }
-  };
-  formValid() {
-    this.setState({
-      formValid:
-        this.state.nameValid &&
-        this.state.addressValid &&
-        this.state.cityValid &&
-        this.state.transportationValid &&
-        this.state.notesValid
-    });
+    return msg
   }
+
   onChange = (fieldName, value) => {
     const changedPlace = { ...this.state.place, [fieldName]: value };
     this.setState({
-      pristineForm: false,
+      changedFields: [...new Set([...this.state.changedFields, fieldName])],
       place: changedPlace
     }, () => {
-      this.validateField(fieldName, value);
+      // this.validateField(fieldName, value);
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
 
-  render() {
+  getValidationMessages(onlyChangedFields = true) {
+    const validationMessages = 'name city street_address transportation notes'.split(' ')
+      .reduce((acc, field) => {
+        const skip = onlyChangedFields && !this.state.changedFields.includes(field)
+        const msg = skip ? null : this._validateField(field, this.state.place[field])
+        acc[field] = msg
+        return acc
+      }, {})
+    return validationMessages
+  }
+  formValid() {
+    return Object.values(this.getValidationMessages(false)).find(i => i !== null) === undefined
+  }
 
+  render() {
+    const validationMessages = this.getValidationMessages()
+    console.log('validationMessages', validationMessages);
+    console.log('state', this.state)
+    // debugger
     console.log(`editplace`, this.props)
     const {
       name,
@@ -217,7 +113,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={name}
                     />
-                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.nameValid} message={this.state.validationMessages.name} />
+                    <ValidationErrors hasError={validationMessages.name} message={validationMessages.name} />
                   </>
                 )}
             </p>
@@ -236,7 +132,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={street_address}
                     />
-                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.addressValid} message={this.state.validationMessages.address} />
+                    <ValidationErrors hasError={validationMessages.street_address} message={validationMessages.street_address} />
                   </>
                 )}
             </p>
@@ -255,7 +151,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={city}
                     />
-                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.cityValid} message={this.state.validationMessages.city} />
+                    <ValidationErrors hasError={validationMessages.city} message={validationMessages.city} />
                   </>
                 )}
             </p>
@@ -274,7 +170,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={transportation}
                     />
-                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.transportationValid} message={this.state.validationMessages.transportation} />
+                    <ValidationErrors hasError={validationMessages.transportation} message={validationMessages.transportation} />
                   </>
                 )}
             </p>
@@ -290,10 +186,10 @@ export default class EditPlace extends Component {
                       onChange={value => this.onChange("notes", value)}
                       tag="textarea"
                       type="text"
-                      required={true}
+                      // required={true}
                       initialValue={notes}
                     />
-                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.notesValid} message={this.state.validationMessages.notes} />
+                    <ValidationErrors hasError={validationMessages.notes} message={validationMessages.notes} />
                   </>
                 )}
             </p>
@@ -302,7 +198,7 @@ export default class EditPlace extends Component {
 
         {editMode ? (
           <div>
-            <button disabled={!this.state.formValid} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
+            <button disabled={!this.formValid()} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
               Save
             </button>
             <button onClick={ev => this.props.cancelAddPlace()}>Cancel</button>{" "}
