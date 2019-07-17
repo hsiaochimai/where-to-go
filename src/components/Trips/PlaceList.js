@@ -34,6 +34,7 @@ export default class PlaceList extends Component {
     const { editModeIndex } = this.state;
     console.log(index);
     this.setState({
+      newPlace:null,
       editModeIndex: editModeIndex === index ? -1 : index
     });
   };
