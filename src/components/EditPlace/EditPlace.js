@@ -10,6 +10,7 @@ export default class EditPlace extends Component {
     const { place } = this.props;
 
     this.state = {
+      pristineForm: true,
       place: { ...place },
       nameValid: true,
       addressValid: true,
@@ -130,7 +131,7 @@ export default class EditPlace extends Component {
         //TODO setState with proper validation messages
         break;
       case "transportation":
-        if (value === 0) {
+        if (!value) {
           fieldErrors.transportation = "transportation is required";
           hasError = true;
         } else {
@@ -147,7 +148,7 @@ export default class EditPlace extends Component {
         //TODO setState with proper validation messages
         break;
       case "notes":
-        if (value === 0) {
+        if (!value) {
           fieldErrors.notes = "notes is required";
           hasError = true;
         } else {
@@ -179,7 +180,10 @@ export default class EditPlace extends Component {
   }
   onChange = (fieldName, value) => {
     const changedPlace = { ...this.state.place, [fieldName]: value };
-    this.setState({ place: changedPlace }, () => {
+    this.setState({
+      pristineForm: false,
+      place: changedPlace
+    }, () => {
       this.validateField(fieldName, value);
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
@@ -213,7 +217,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={name}
                     />
-                    <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
+                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.nameValid} message={this.state.validationMessages.name} />
                   </>
                 )}
             </p>
@@ -232,7 +236,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={street_address}
                     />
-                    <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
+                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.addressValid} message={this.state.validationMessages.address} />
                   </>
                 )}
             </p>
@@ -251,7 +255,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={city}
                     />
-                    <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
+                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.cityValid} message={this.state.validationMessages.city} />
                   </>
                 )}
             </p>
@@ -270,7 +274,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={transportation}
                     />
-                    <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transportation} />
+                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.transportationValid} message={this.state.validationMessages.transportation} />
                   </>
                 )}
             </p>
@@ -289,7 +293,7 @@ export default class EditPlace extends Component {
                       required={true}
                       initialValue={notes}
                     />
-                    <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
+                    <ValidationErrors hasError={this.state.pristineForm === false && !this.state.notesValid} message={this.state.validationMessages.notes} />
                   </>
                 )}
             </p>
