@@ -5,8 +5,6 @@ import ds from "../../STORE/dataService";
 import EditPlace from "../EditPlace/EditPlace";
 import "./PlaceList.css";
 import pt from "prop-types";
-// import whereToGoContext from '../whereToGoContext/whereToGoContext'
-const { deletePlace, savePlace, getTrips } = ds;
 const newPlaceTemplate = {
   id: -1,
   name: "",
@@ -20,6 +18,8 @@ const newPlaceTemplate = {
 export default class PlaceList extends Component {
   // static contextType= whereToGoContext
   static propTypes = {
+    onDeletePlace: pt.func.isRequired,
+    onSavePlace: pt.func.isRequired,
     trip: pt.object //a trip object with associated places
   };
   constructor(props) {
@@ -34,32 +34,34 @@ export default class PlaceList extends Component {
     const { editModeIndex } = this.state;
     console.log(index);
     this.setState({
+      newPlace: null,
       editModeIndex: editModeIndex === index ? -1 : index
     });
   };
   addPlace = () => {
-    newPlaceTemplate.trip_id = this.props.trip.id;
+    const newPlace = { ...newPlaceTemplate }
+    newPlace.trip_id = this.props.trip.id;
+
     this.setState({
-      newPlace: { ...newPlaceTemplate },
+      newPlace,
       editModeIndex: 0
     });
   };
-  loadData = async () => {
+
+  onDeletePlace = async id => {
+    if (!window.confirm('Are you sure?')) {
+      return
+    }
     try {
-      const trips = await getTrips();
-      this.context.set({ trips });
+      await this.props.onDeletePlace(id);
       // success toast
     } catch (e) {
       //error toast
     }
   };
-  onDeletePlace = async id => {
-    await deletePlace(id);
-    this.loadData();
-  };
   onSubmitPlace = async place => {
-    await savePlace(place);
-    this.loadData();
+    // TODO try..catch and toasts
+    await this.props.onSavePlace(place);
     this.setState({
       editModeIndex: null,
       newPlace: null
@@ -80,15 +82,13 @@ export default class PlaceList extends Component {
       newPlace: null
     });
   };
-  //   componentDidUpdate() {
-  //    this.props.loadData()
-  // }
+
   render() {
     const trip = this.props.trip;
     if (!trip) {
       return null;
     }
-    const tripPlaces = trip.places;
+    const tripPlaces = [...trip.places];
     if (this.state.newPlace) {
       tripPlaces.unshift(this.state.newPlace);
     }
@@ -103,25 +103,26 @@ export default class PlaceList extends Component {
                 className={editingModeClassName}
                 onClick={() => this.toggleeditModeIndex(index)}
               >
-                 <Icon icon="edit" /> 
+                <Icon icon="edit" />
                 Edit
               </button>
               <button
                 className={editingModeClassName}
                 onClick={() => this.onDeletePlace(place.id)}
               >
-                 <Icon icon="trash" /> 
+                <Icon icon="trash" />
                 Delete
               </button>
             </div>
           ) : null}
           <div className="cardContent padded">
             <EditPlace
+              key={place.id}
               place={place}
               editMode={isEditing}
               onSubmitPlace={this.onSubmitPlace}
               cancelAddPlace={this.cancelAddPlace}
-              // ref={(r) => this.placeListRefs[index] = r}
+            // ref={(r) => this.placeListRefs[index] = r}
             />
             {/* <button onClick={() => {
 
@@ -142,9 +143,9 @@ className={`saveButton flexed `} >Save</button>
       return card;
     });
     return (
-    <div className="placeList">
-      <button className='addPlace' disabled={this.state.newPlace} onClick={()=>this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
-    {placeCard}
-    </div>);
+      <div className="placeList">
+        <button className='addPlace' disabled={this.state.newPlace} onClick={() => this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
+        {placeCard}
+      </div>);
   }
 }

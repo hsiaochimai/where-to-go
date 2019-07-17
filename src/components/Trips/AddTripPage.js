@@ -15,13 +15,13 @@ const defaultTrip = {
 };
 
 export default class AddTripPage extends Component {
-    static contextType = whereToGoContext
+  static contextType = whereToGoContext
   onSaveTrip = async trip => {
 
     await ds.saveTrip(trip);
     this.props.history.push("/dashboard")
   };
-  cancelButton= ()=>{
+  cancelButton = () => {
     this.props.history.push("/home")
   }
   componentDidMount = async () => {
@@ -30,24 +30,24 @@ export default class AddTripPage extends Component {
       return;
     }
     //logged in, so load the data
-    return 
-    
+    return
+
   };
 
   render() {
-      console.log(this.context)
+    console.log(this.context)
     return (
       <>
-      <NavBar/>
-      <div className='addTrip-Container'>
-        <div className='addTripPage padded'>
-        <h2>Add Trip</h2>
-        <EditTrip 
+        <NavBar onLogout={this.context.doLogout} />
+        <div className='addTrip-Container'>
+          <div className='addTripPage padded'>
+            <h2>Add Trip</h2>
+            <EditTrip
               onSaveTrip={this.onSaveTrip}
               trip={defaultTrip}
-              cancelButton={this.cancelButton}/>
-      </div>
-      </div>
+              cancelButton={this.cancelButton} />
+          </div>
+        </div>
       </>
     );
   }

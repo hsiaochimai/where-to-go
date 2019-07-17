@@ -36,7 +36,7 @@ export default class ControlledInput extends React.Component {
         //     return <>{this.state.value}</>
         // }
         const { editMode, initialValue, tag, onChange,required, ...rest } = this.props
-     console.log('controlled input where are you')
+    //  console.log('controlled input where are you')
         const props = {
             ...rest,
             onChange: this.onChange,

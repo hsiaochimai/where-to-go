@@ -4,6 +4,11 @@ import ValidationErrors from "../ValidationErrors/ValidationErrors";
 import ds from "../../STORE/dataService";
 import './EditPlace.css'
 const { savePlace } = ds;
+
+const defaultState = {
+  changedFields: [],
+}
+
 export default class EditPlace extends Component {
   constructor(props) {
     super(props);
@@ -11,169 +16,78 @@ export default class EditPlace extends Component {
 
     this.state = {
       place: { ...place },
-      nameValid: true,
-      addressValid: true,
-      cityValid: true,
-      transportationValid: true,
-      notesValid: true,
-      formValid:true,
-      validationMessages: {
-        name: null,
-        address: null,
-        city: null,
-        transportation: null,
-        notes: null
-      }
+      ...defaultState
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.place !== this.props.place) {
-      this.setState({ place: nextProps.place });
-    }
-    if(nextProps.place.id  || this.props.place.id ===-1){
-      console.log(`hello`)
-       this.setState({
-         nameValid: null,
-         addressValid: null,
-         cityValid: null,
-         transportationValid: null,
-         notesValid: null,
-         formValid:null,
- 
-       }, ()=>{})
-     }else{
-      this.setState({
-        nameValid: true,
-        addressValid: true,
-        cityValid: true,
-        transportationValid: true,
-        notesValid: true,
-        formValid:true,
 
-      }, ()=>{})
-     }
-    
+
+  componentWillReceiveProps(nextProps) {
+    console.log(`componentWillReceiveProps`)
+    this.setState({
+      place: { ...nextProps.place },
+      ...defaultState
+    })
   }
-  validateField = (fieldName, value) => {
-    const fieldErrors = { ...this.state.validationMessages };
-    let hasError = false;
-    value = value.trim();
+
+  /**
+   * returns a message or null if the value is valid
+   */
+  _validateField = (fieldName, value) => {
+    let msg = null
+    typeof value === "string" && (value = value.trim());
     switch (fieldName) {
       case "name":
-        if (value === 0) {
-          fieldErrors.name = "Place name is required";
-          hasError = true;
+        if (!value) {
+          msg = "Place name is required";
         } else {
           if (value.length < 3) {
-            fieldErrors.name = "Place name must be at least 3 characters";
-            hasError = true;
-          } else {
-            fieldErrors.name = "";
-            hasError = false;
+            msg = "Place name must be at least 3 characters";
           }
         }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            nameValid: !hasError
-          },
-          this.formValid
-        );
-
         break;
+      case "notes":
       case "city":
-        if (value === '') {
-          fieldErrors.city = "City is required";
-          hasError = true;
-        } else {
-          fieldErrors.city = "";
-          hasError = false;
+      case "transportation":
+      case "street_address":
+        if (!value) {
+          msg = "This field is required";
         }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            cityValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-        case "street_address":
-            if (value === '') {
-              fieldErrors.address = "address is required";
-              hasError = true;
-            } else {
-              fieldErrors.address = "";
-              hasError = false;
-            }
-            this.setState(
-              {
-                validationMessages: fieldErrors,
-                addressValid: !hasError
-              },
-              this.formValid
-            );
-            //TODO setState with proper validation messages
-            break;
-            case "transportation":
-        if (value === 0) {
-          fieldErrors.transportation = "transportation is required";
-          hasError = true;
-        } else {
-          fieldErrors.transportation = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            transportationValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-        case "notes":
-        if (value === 0) {
-          fieldErrors.notes = "notes is required";
-          hasError = true;
-        } else {
-          fieldErrors.notes = "";
-          hasError = false;
-        }
-        this.setState(
-          {
-            validationMessages: fieldErrors,
-            notesValid: !hasError
-          },
-          this.formValid
-        );
-        //TODO setState with proper validation messages
-        break;
-      default:
-        break;
+
     }
-  };
-  formValid() {
-    this.setState({
-      formValid:
-        this.state.nameValid &&
-        this.state.addressValid &&
-        this.state.cityValid &&
-        this.state.transportationValid &&
-        this.state.notesValid
-    });
+    return msg
   }
+
   onChange = (fieldName, value) => {
     const changedPlace = { ...this.state.place, [fieldName]: value };
-    this.setState({ place: changedPlace }, () => {
-      this.validateField(fieldName, value);
+    this.setState({
+      changedFields: [...new Set([...this.state.changedFields, fieldName])],
+      place: changedPlace
+    }, () => {
+      // this.validateField(fieldName, value);
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
- 
-  render() {
 
-    console.log(`editplace`,this.props)
+  getValidationMessages(onlyChangedFields = true) {
+    const validationMessages = 'name city street_address transportation notes'.split(' ')
+      .reduce((acc, field) => {
+        const skip = onlyChangedFields && !this.state.changedFields.includes(field)
+        const msg = skip ? null : this._validateField(field, this.state.place[field])
+        acc[field] = msg
+        return acc
+      }, {})
+    return validationMessages
+  }
+  formValid() {
+    return Object.values(this.getValidationMessages(false)).find(i => i !== null) === undefined
+  }
+
+  render() {
+    const validationMessages = this.getValidationMessages()
+    console.log('validationMessages', validationMessages);
+    console.log('state', this.state)
+    // debugger
+    console.log(`editplace`, this.props)
     const {
       name,
       street_address,
@@ -186,105 +100,105 @@ export default class EditPlace extends Component {
       <div className="cardContent padded">
         <form>
           <div>
-          <p>
-            <span className="">Name</span>
-            {!editMode ? (
-              name
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("name", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={name}
-              />
-              <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
-            </>
-            )}
+            <p>
+              <span className="">Name</span>
+              {!editMode ? (
+                name
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("name", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={name}
+                    />
+                    <ValidationErrors hasError={validationMessages.name} message={validationMessages.name} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Address</span>
-            {!editMode ? (
-              street_address
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("street_address", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={street_address}
-              />
-              <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
-            </>
-            )}
+              <span className="">Address</span>
+              {!editMode ? (
+                street_address
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("street_address", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={street_address}
+                    />
+                    <ValidationErrors hasError={validationMessages.street_address} message={validationMessages.street_address} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">City</span>
-            {!editMode ? (
-             city
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("city", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={city}
-              />
-              <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
-            </>
-            )}
+              <span className="">City</span>
+              {!editMode ? (
+                city
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("city", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={city}
+                    />
+                    <ValidationErrors hasError={validationMessages.city} message={validationMessages.city} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Transportation</span>
-            {!editMode ? (
-             transportation 
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("transportation", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={transportation}
-              />
-              <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transportation} />
-            </>
-            )}
+              <span className="">Transportation</span>
+              {!editMode ? (
+                transportation
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("transportation", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={transportation}
+                    />
+                    <ValidationErrors hasError={validationMessages.transportation} message={validationMessages.transportation} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Notes</span>
-            {!editMode ? (
-          notes
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("notes", value)}
-                tag="textarea"
-                type="text"
-                required={true}
-                initialValue={notes}
-              />
-              <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
-            </>
-            )}
+              <span className="">Notes</span>
+              {!editMode ? (
+                notes
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("notes", value)}
+                      tag="textarea"
+                      type="text"
+                      // required={true}
+                      initialValue={notes}
+                    />
+                    <ValidationErrors hasError={validationMessages.notes} message={validationMessages.notes} />
+                  </>
+                )}
             </p>
           </div>
         </form>
 
         {editMode ? (
           <div>
-            <button disabled={!this.state.formValid} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
+            <button disabled={!this.formValid()} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
               Save
             </button>
             <button onClick={ev => this.props.cancelAddPlace()}>Cancel</button>{" "}

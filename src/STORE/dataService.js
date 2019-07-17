@@ -11,7 +11,15 @@ const ds = {
     const data = ls("authData");
     return data;
   },
+  doLogout: () => {
+    user = null;
+    ls("authData", null);
+  },
   doLogin: async (email, password) => {
+    // TODO set user.JWTTOKEN to the received token
+    // const res = await fetch()....
+    // user = res.user
+    // user.JWTTOKEN = res.token
     user = store.users.find(
       user => user.email === email && user.password === password
     );
@@ -33,14 +41,14 @@ const ds = {
     trips.splice(trips.findIndex(t => t.id === id), 1);
     // adding a trip
     // trips.push({id, xx, name:'Foo' ,.......})
-    console.log(`this is delete`,trips)
+    console.log(`this is delete`, trips)
   },
   saveTrip: async tripObj => {
     const trip = { ...tripObj };
-    
+
     //assign an ID
     if (trip.id === -1) {
-      trip.id = store.trips.length +1;
+      trip.id = store.trips.length + 1;
     }
 
     //make sure the user is the current one
@@ -56,12 +64,13 @@ const ds = {
       trips.splice(trips.findIndex(t => t.id === trip.id), 1, trip);
     } else {
       trips.unshift(trip);
-     
+
     }
-    console.log(`does this work?`,trips)
+    console.log(`does this work?`, trips)
   },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
+    //TODO use user.JWTTOKEN to build the Auth header
     console.log(`ds:getTrips(${user.email})`);
     const trips = store.trips.filter(trip => trip.user_id === user.id);
     trips.forEach(trip => {
@@ -77,10 +86,10 @@ const ds = {
   },
   savePlace: async placeObj => {
     const place = { ...placeObj };
-    
+
     //assign an ID
     if (place.id === -1) {
-      place.id = store.places.length +1;
+      place.id = store.places.length + 1;
     }
 
     //make sure the user is the current one
@@ -89,16 +98,16 @@ const ds = {
 
 
     //make sure numOfDays is a number
-  
-    const { places} = store;
+
+    const { places } = store;
     const index = places.findIndex(p => p.id === place.id);
     if (index > -1) {
       places.splice(places.findIndex(p => p.id === place.id), 1, place);
     } else {
       places.unshift(place);
-     
+
     }
-    console.log(`does places work?`,places)
+    console.log(`does places work?`, places)
   },
 };
 
