@@ -16,6 +16,10 @@ const ds = {
     ls("authData", null);
   },
   doLogin: async (email, password) => {
+    // TODO set user.JWTTOKEN to the received token
+    // const res = await fetch()....
+    // user = res.user
+    // user.JWTTOKEN = res.token
     user = store.users.find(
       user => user.email === email && user.password === password
     );
@@ -66,6 +70,7 @@ const ds = {
   },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
+    //TODO use user.JWTTOKEN to build the Auth header
     console.log(`ds:getTrips(${user.email})`);
     const trips = store.trips.filter(trip => trip.user_id === user.id);
     trips.forEach(trip => {

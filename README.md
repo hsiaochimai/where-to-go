@@ -7,7 +7,7 @@
 
 POST body: user.password
 
-return value: JWT token and the user object (excliding the password field)
+return value: JWT token and the user object (excluding the password field)
 
 NOTE: send auth JWT token for all the routes except `/login`
 
