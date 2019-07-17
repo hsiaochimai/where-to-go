@@ -16,7 +16,7 @@ export default class EditPlace extends Component {
       cityValid: true,
       transportationValid: true,
       notesValid: true,
-      formValid:true,
+      formValid: false,
       validationMessages: {
         name: null,
         address: null,
@@ -26,38 +26,52 @@ export default class EditPlace extends Component {
       }
     };
   }
+
+  componentDidMount() {
+    const { place } = this.state
+    // Object.keys(place).forEach(k=>{})
+    for (let key in place) {
+      console.log(`validate ${key}, ${place[key]}`)
+      this.validateField(key, place[key])
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    console.log(`componentWillReceiveProps`)
+    return
+
     if (nextProps.place !== this.props.place) {
       this.setState({ place: nextProps.place });
     }
-    if(nextProps.place.id  || this.props.place.id ===-1){
+    if (nextProps.place.id || this.props.place.id === -1) {
       console.log(`hello`)
-       this.setState({
-         nameValid: null,
-         addressValid: null,
-         cityValid: null,
-         transportationValid: null,
-         notesValid: null,
-         formValid:null,
- 
-       }, ()=>{})
-     }else{
+      this.setState({
+        nameValid: null,
+        addressValid: null,
+        cityValid: null,
+        transportationValid: null,
+        notesValid: null,
+        formValid: null,
+
+      }, () => { })
+    } else {
       this.setState({
         nameValid: true,
         addressValid: true,
         cityValid: true,
         transportationValid: true,
         notesValid: true,
-        formValid:true,
+        formValid: true,
 
-      }, ()=>{})
-     }
-    
+      }, () => { })
+    }
+
   }
   validateField = (fieldName, value) => {
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
-    value = value.trim();
+    console.log(fieldName, value);
+    typeof value === "string" && (value = value.trim());
     switch (fieldName) {
       case "name":
         if (value === 0) {
@@ -98,24 +112,24 @@ export default class EditPlace extends Component {
         );
         //TODO setState with proper validation messages
         break;
-        case "street_address":
-            if (value === '') {
-              fieldErrors.address = "address is required";
-              hasError = true;
-            } else {
-              fieldErrors.address = "";
-              hasError = false;
-            }
-            this.setState(
-              {
-                validationMessages: fieldErrors,
-                addressValid: !hasError
-              },
-              this.formValid
-            );
-            //TODO setState with proper validation messages
-            break;
-            case "transportation":
+      case "street_address":
+        if (value === '') {
+          fieldErrors.address = "address is required";
+          hasError = true;
+        } else {
+          fieldErrors.address = "";
+          hasError = false;
+        }
+        this.setState(
+          {
+            validationMessages: fieldErrors,
+            addressValid: !hasError
+          },
+          this.formValid
+        );
+        //TODO setState with proper validation messages
+        break;
+      case "transportation":
         if (value === 0) {
           fieldErrors.transportation = "transportation is required";
           hasError = true;
@@ -132,7 +146,7 @@ export default class EditPlace extends Component {
         );
         //TODO setState with proper validation messages
         break;
-        case "notes":
+      case "notes":
         if (value === 0) {
           fieldErrors.notes = "notes is required";
           hasError = true;
@@ -170,10 +184,10 @@ export default class EditPlace extends Component {
       console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
     });
   };
- 
+
   render() {
 
-    console.log(`editplace`,this.props)
+    console.log(`editplace`, this.props)
     const {
       name,
       street_address,
@@ -186,98 +200,98 @@ export default class EditPlace extends Component {
       <div className="cardContent padded">
         <form>
           <div>
-          <p>
-            <span className="">Name</span>
-            {!editMode ? (
-              name
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("name", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={name}
-              />
-              <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
-            </>
-            )}
+            <p>
+              <span className="">Name</span>
+              {!editMode ? (
+                name
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("name", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={name}
+                    />
+                    <ValidationErrors hasError={!this.state.nameValid} message={this.state.validationMessages.name} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Address</span>
-            {!editMode ? (
-              street_address
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("street_address", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={street_address}
-              />
-              <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
-            </>
-            )}
+              <span className="">Address</span>
+              {!editMode ? (
+                street_address
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("street_address", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={street_address}
+                    />
+                    <ValidationErrors hasError={!this.state.addressValid} message={this.state.validationMessages.address} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">City</span>
-            {!editMode ? (
-             city
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("city", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={city}
-              />
-              <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
-            </>
-            )}
+              <span className="">City</span>
+              {!editMode ? (
+                city
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("city", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={city}
+                    />
+                    <ValidationErrors hasError={!this.state.cityValid} message={this.state.validationMessages.city} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Transportation</span>
-            {!editMode ? (
-             transportation 
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("transportation", value)}
-                tag="input"
-                type="text"
-                required={true}
-                initialValue={transportation}
-              />
-              <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transportation} />
-            </>
-            )}
+              <span className="">Transportation</span>
+              {!editMode ? (
+                transportation
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("transportation", value)}
+                      tag="input"
+                      type="text"
+                      required={true}
+                      initialValue={transportation}
+                    />
+                    <ValidationErrors hasError={!this.state.transportationValid} message={this.state.validationMessages.transportation} />
+                  </>
+                )}
             </p>
           </div>
           <div>
             <p>
-            <span className="">Notes</span>
-            {!editMode ? (
-          notes
-            ) : (
-              <>
-              <ControlledInput
-                onChange={value => this.onChange("notes", value)}
-                tag="textarea"
-                type="text"
-                required={true}
-                initialValue={notes}
-              />
-              <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
-            </>
-            )}
+              <span className="">Notes</span>
+              {!editMode ? (
+                notes
+              ) : (
+                  <>
+                    <ControlledInput
+                      onChange={value => this.onChange("notes", value)}
+                      tag="textarea"
+                      type="text"
+                      required={true}
+                      initialValue={notes}
+                    />
+                    <ValidationErrors hasError={!this.state.notesValid} message={this.state.validationMessages.notes} />
+                  </>
+                )}
             </p>
           </div>
         </form>

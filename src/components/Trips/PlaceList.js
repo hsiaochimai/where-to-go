@@ -38,9 +38,11 @@ export default class PlaceList extends Component {
     });
   };
   addPlace = () => {
-    newPlaceTemplate.trip_id = this.props.trip.id;
+    const newPlace = { ...newPlaceTemplate }
+    newPlace.trip_id = this.props.trip.id;
+
     this.setState({
-      newPlace: { ...newPlaceTemplate },
+      newPlace,
       editModeIndex: 0
     });
   };
@@ -117,6 +119,7 @@ export default class PlaceList extends Component {
           ) : null}
           <div className="cardContent padded">
             <EditPlace
+              key={place.id}
               place={place}
               editMode={isEditing}
               onSubmitPlace={this.onSubmitPlace}
