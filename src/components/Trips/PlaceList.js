@@ -34,7 +34,7 @@ export default class PlaceList extends Component {
     const { editModeIndex } = this.state;
     console.log(index);
     this.setState({
-      newPlace:null,
+      newPlace: null,
       editModeIndex: editModeIndex === index ? -1 : index
     });
   };
@@ -91,7 +91,7 @@ export default class PlaceList extends Component {
     if (!trip) {
       return null;
     }
-    const tripPlaces = trip.places;
+    const tripPlaces = [...trip.places];
     if (this.state.newPlace) {
       tripPlaces.unshift(this.state.newPlace);
     }
@@ -106,14 +106,14 @@ export default class PlaceList extends Component {
                 className={editingModeClassName}
                 onClick={() => this.toggleeditModeIndex(index)}
               >
-                 <Icon icon="edit" /> 
+                <Icon icon="edit" />
                 Edit
               </button>
               <button
                 className={editingModeClassName}
                 onClick={() => this.onDeletePlace(place.id)}
               >
-                 <Icon icon="trash" /> 
+                <Icon icon="trash" />
                 Delete
               </button>
             </div>
@@ -125,7 +125,7 @@ export default class PlaceList extends Component {
               editMode={isEditing}
               onSubmitPlace={this.onSubmitPlace}
               cancelAddPlace={this.cancelAddPlace}
-              // ref={(r) => this.placeListRefs[index] = r}
+            // ref={(r) => this.placeListRefs[index] = r}
             />
             {/* <button onClick={() => {
 
@@ -146,9 +146,9 @@ className={`saveButton flexed `} >Save</button>
       return card;
     });
     return (
-    <div className="placeList">
-      <button className='addPlace' disabled={this.state.newPlace} onClick={()=>this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
-    {placeCard}
-    </div>);
+      <div className="placeList">
+        <button className='addPlace' disabled={this.state.newPlace} onClick={() => this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
+        {placeCard}
+      </div>);
   }
 }
