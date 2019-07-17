@@ -1,13 +1,13 @@
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React, { Component } from "react";
 import { checkLoginAndRedirect } from "../../helpers";
 import ds from "../../STORE/dataService";
-import whereToGoContext from "../whereToGoContext/whereToGoContext";
-import TripList from "../TripList/TripList";
-import PlaceList from "./PlaceList";
 import EditTrip from "../EditTrip/EditTrip";
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import "./TripPage.css";
 import NavBar from "../NavBar/NavBar";
+import TripList from "../TripList/TripList";
+import whereToGoContext from "../whereToGoContext/whereToGoContext";
+import PlaceList from "./PlaceList";
+import "./TripPage.css";
 const { deleteTrip } = ds;
 export default class TripPage extends Component {
   static contextType = whereToGoContext;
@@ -71,7 +71,7 @@ export default class TripPage extends Component {
     return (
 
       <div className="tab-page">
-        <NavBar />
+        <NavBar onLogout={this.context.doLogout} />
         <div className="trip-page-container">
           <TripList trips={trips} onTripSelected={this.onTripSelected} />
 

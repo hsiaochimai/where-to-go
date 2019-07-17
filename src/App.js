@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import LoginPage from './components/LoginPage/LoginPage'
-import { 
-  faMapMarkedAlt,  faEdit,   faSave,  faTrash,
-   faSuitcase, faWindowClose
+import {
+  faMapMarkedAlt, faEdit, faSave, faTrash,
+  faSuitcase, faWindowClose
 } from '@fortawesome/free-solid-svg-icons';
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Router, Redirect, Route, Switch } from "react-router-dom";
+import history from "./history";
 import './App.css';
 import whereToGoContext from './components/whereToGoContext/whereToGoContext'
 import store from './STORE/store';
@@ -13,10 +14,11 @@ import LandingPage from './components/LandingPage/LandingPage';
 import NavBar from './components/NavBar/NavBar';
 import AddTripPage from './components/Trips/AddTripPage';
 import TripPage from './components/Trips/TripPage';
+import ds from './STORE/dataService'
 
 library.add(
-  faEdit,   faSave,  faTrash, 
- faMapMarkedAlt, faSuitcase, faWindowClose
+  faEdit, faSave, faTrash,
+  faMapMarkedAlt, faSuitcase, faWindowClose
 )
 class App extends Component {
   state = {
@@ -35,30 +37,37 @@ class App extends Component {
     }) //trips, places or user
   }
 
+  doLogout = () => {
+    ds.doLogout()
+    this.setState({ user: null })
+    history.push('/login')
+  }
+
   render() {
     const contextValue = {
       ...this.state,
       set: this.contextSetter,
+      doLogout: this.doLogout,
 
     }
     return (
       <div className="App" >
         <whereToGoContext.Provider value={contextValue}>
-         
-          <BrowserRouter>
-         
+
+          <Router history={history}>
+
             <Switch>
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/" component={LoginPage} />
               <Route path='/dashboard'
                 component={TripPage} />
-                <Route path='/home'
+              <Route path='/home'
                 component={LandingPage} />
-                <Route path='/add-trip'
+              <Route path='/add-trip'
                 component={AddTripPage} />
             </Switch>
 
-          </BrowserRouter>
+          </Router>
         </whereToGoContext.Provider>
       </div>
     );
