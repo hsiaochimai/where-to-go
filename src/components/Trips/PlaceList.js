@@ -47,18 +47,17 @@ export default class PlaceList extends Component {
       editModeIndex: 0
     });
   };
-  loadData = async () => {
+
+  onDeletePlace = async id => {
+    if (!window.confirm('Are you sure?')) {
+      return
+    }
     try {
-      const trips = await getTrips();
-      this.context.set({ trips });
+      await this.props.onDeletePlace(id);
       // success toast
     } catch (e) {
       //error toast
     }
-  };
-  onDeletePlace = async id => {
-    await deletePlace(id);
-    this.loadData();
   };
   onSubmitPlace = async place => {
     await savePlace(place);
