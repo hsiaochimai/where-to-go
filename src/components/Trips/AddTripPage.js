@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ControlledInput from "../ControlledInput/ControlledInput";
 import whereToGoContext from '../whereToGoContext/whereToGoContext'
 import { checkLoginAndRedirect } from "../../helpers";
 import EditTrip from '../EditTrip/EditTrip'

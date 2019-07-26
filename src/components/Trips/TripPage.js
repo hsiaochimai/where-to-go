@@ -7,9 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import TripList from "../TripList/TripList";
 import whereToGoContext from "../whereToGoContext/whereToGoContext";
 import PlaceList from "./PlaceList";
-import history from "../../history";
 import "./TripPage.css";
-const { deleteTrip } = ds;
 export default class TripPage extends Component {
   static contextType = whereToGoContext;
   constructor(props) {

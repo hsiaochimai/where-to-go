@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import whereToGoContext from "../whereToGoContext/whereToGoContext";

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import ValidationErrors from "../ValidationErrors/ValidationErrors";
-import ds from "../../STORE/dataService";
 import './EditPlace.css'
-const { savePlace } = ds;
+
 
 const defaultState = {
   changedFields: [],

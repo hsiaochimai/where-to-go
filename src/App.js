@@ -5,13 +5,11 @@ import {
   faMapMarkedAlt, faEdit, faSave, faTrash,
   faSuitcase, faWindowClose
 } from '@fortawesome/free-solid-svg-icons';
-import { Router, Redirect, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import './App.css';
-import whereToGoContext from './components/whereToGoContext/whereToGoContext'
-import store from './STORE/store';
+import whereToGoContext from './components/whereToGoContext/whereToGoContext';
 import LandingPage from './components/LandingPage/LandingPage';
-import NavBar from './components/NavBar/NavBar';
 import AddTripPage from './components/Trips/AddTripPage';
 import TripPage from './components/Trips/TripPage';
 import ds from './STORE/dataService'

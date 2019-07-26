@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "react-simple-card";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import ds from "../../STORE/dataService";
 import EditPlace from "../EditPlace/EditPlace";
 import "./PlaceList.css";
 import pt from "prop-types";

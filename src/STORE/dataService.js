@@ -1,4 +1,4 @@
-import store from "./store";
+
 import ls from "local-storage";
 import {API_BASE_URL} from '../config'
 //set this to an user object to login
@@ -66,11 +66,7 @@ const ds = {
       method: 'delete',
       headers: addAuthTokenHeader(),
   })
-    // const { trips } = store;
-    // trips.splice(trips.findIndex(t => t.id === id), 1);
-    // adding a trip
-    // // trips.push({id, xx, name:'Foo' ,.......})
-    // console.log(`this is delete`, trips)
+    
   },
   saveTrip: async tripObj => {
    
@@ -85,42 +81,14 @@ const ds = {
           'Content-type': 'application/json'
       }),
   })
-    // const trip = { ...tripObj };
-
-    // //assign an ID
-    // if (trip.id === -1) {
-    //   trip.id = store.trips.length + 1;
-    // }
-
-    // //make sure the user is the current one
-    // const user = await ds.getLoggedInUser()
-    // trip.user_id = user.id
-
-
-    // //make sure numofdays is a number
-    // trip.numofdays = +trip.numofdays;
-    // const { trips } = store;
-    // const index = trips.findIndex(t => t.id === trip.id);
-    // if (index > -1) {
-    //   trips.splice(trips.findIndex(t => t.id === trip.id), 1, trip);
-    // } else {
-    //   trips.unshift(trip);
-
-    // }
-    // console.log(`does this work?`, trips)
+  
   },
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
     //TODO use user.JWTTOKEN to build the Auth header
-    // console.log(`ds:getTrips(${user.email})`);
-    // const trips = store.trips.filter(trip => trip.user_id === user.id);
-    // trips.forEach(trip => {
-    //   //associated records
-    //   trip.places = store.places.filter(place => place.trip_id === trip.id);
-    // });
-    // return trips;
+   
     if (!ds.getLoggedInUser()) {
-      // throw new Error(NOT_LOGGED_IN)
+      
       return Promise.reject(new Error('NOT_LOGGED_IN'))
   }
     return fetch(`${API_BASE_URL}/trips`, {
@@ -128,7 +96,7 @@ const ds = {
   })
       .then(r => r.json())
       .then(data => {
-console.log(data.trips)
+
           return data.trips
       })
   },
@@ -137,9 +105,7 @@ console.log(data.trips)
       method: 'delete',
       headers: addAuthTokenHeader(),
   })
-    // const { places } = store;
-    // places.splice(places.findIndex(p => p.id === id), 1);
-    // console.log(`did the delete work`, places);
+  
   },
   savePlace: async placeObj => {
     const place = { ...placeObj };
@@ -150,27 +116,7 @@ console.log(data.trips)
       headers: addAuthTokenHeader({
           'Content-type': 'application/json'
       }),})
-    //assign an ID
-    // if (place.id === -1) {
-    //   place.id = store.places.length + 1;
-    // }
-
-    //make sure the user is the current one
-    // const user = await ds.getLoggedInUser()
-    // trip.user_id = user.id
-
-
-    //make sure numofdays is a number
-
-    // const { places } = store;
-    // const index = places.findIndex(p => p.id === place.id);
-    // if (index > -1) {
-    //   places.splice(places.findIndex(p => p.id === place.id), 1, place);
-    // } else {
-    //   places.unshift(place);
-
-    // }
-    // console.log(`does places work?`, places)
+   
   },
 }
 
