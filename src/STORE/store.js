@@ -14,9 +14,9 @@ export default {
     }
   ],
   trips: [
-    { id: 1, name: "Portland", numOfDays: 2, user_id: 1, completed: false },
-    { id: 2, name: "Los Angeles", numOfDays: 3, user_id: 1, completed: false },
-    { id: 3, name: "New Orleans", numOfDays: 4, user_id: 2, completed: false }
+    { id: 1, name: "Portland", numofdays: 2, user_id: 1, completed: false },
+    { id: 2, name: "Los Angeles", numofdays: 3, user_id: 1, completed: false },
+    { id: 3, name: "New Orleans", numofdays: 4, user_id: 2, completed: false }
   ],
 
   places: [

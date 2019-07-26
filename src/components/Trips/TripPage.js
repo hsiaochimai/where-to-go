@@ -105,7 +105,7 @@ export default class TripPage extends Component {
                 <h2 className={`barTitle padded ${editModeClass}`}>
                   {!selectedTrip
                     ? null
-                    : `Number of Days: ${selectedTrip.numOfDays} days`}
+                    : `Number of Days: ${selectedTrip.numofdays} days`}
                 </h2>
 
                 {this.state.editMode ? (

@@ -54,7 +54,7 @@ onEdit=() =>{
                 </div>
                 }
                 <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? 'Please select' : selectedTrip.name}</h2>
-                <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numOfDays} days`}</h2>
+                <h2 className={`barTitle ${editModeClass}`}>{!selectedTrip ? null : `Duration of stay: ${selectedTrip.numofdays} days`}</h2>
               {this.state.editMode? <EditTrip 
               onSaveTrip={this.props.onSaveTrip}
               trip={selectedTrip}/>: null}

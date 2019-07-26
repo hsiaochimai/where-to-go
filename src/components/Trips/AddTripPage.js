@@ -9,7 +9,7 @@ import './AddTripPage.css'
 const defaultTrip = {
   id: -1,
   name: "",
-  numOfDays: null,
+  numofdays: null,
   user_id: null,
   completed: false
 };

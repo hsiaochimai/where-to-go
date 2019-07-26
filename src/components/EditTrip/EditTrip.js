@@ -18,7 +18,7 @@ export default class EditTrip extends Component {
       formValid: true,
       validationMessages:{
         name: null,
-        numOfDays:null
+        numofdays:null
       }
     };
   }
@@ -48,13 +48,13 @@ let hasError= false
         }, this.formValid);
 
         break;
-      case "numOfDays":
+      case "numofdays":
         if(value=== ''){
-        fieldErrors.numOfDays = 'Trip duration is required';
+        fieldErrors.numofdays = 'Trip duration is required';
           hasError = true;
         }
         else {
-          fieldErrors.numOfDays = '';
+          fieldErrors.numofdays = '';
           hasError = false;
       }
       this.setState({
@@ -93,7 +93,7 @@ let hasError= false
   render() {
 
     console.log(`edit trip`, this.state);
-    const { name, numOfDays } = this.state.trip;
+    const { name, numofdays } = this.state.trip;
 
     return (
       <div className='edit-trip'>
@@ -120,15 +120,15 @@ let hasError= false
          
             <label>Number of Days:</label>
             <ControlledInput
-              onChange={value => this.onChange("numOfDays", value)}
+              onChange={value => this.onChange("numofdays", value)}
               tag="input"
               type="number"
               min="1"
               required={true}
-              initialValue={numOfDays}
+              initialValue={numofdays}
               //   editMode={editMode}
             />
-    <ValidationErrors hasError={!this.state.numOfDaysValid} message={this.state.validationMessages.numOfDays} />
+    <ValidationErrors hasError={!this.state.numOfDaysValid} message={this.state.validationMessages.numofdays} />
 
         </form>
         {/* <div className='action-buttons' >
