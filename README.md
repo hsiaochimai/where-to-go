@@ -20,7 +20,7 @@ This application's functionality includes:
 
 
 ## Application Website
-https://lioness-app.jchmai21.now.sh/login
+https://where-to-go-app.jchmai21.now.sh/
 
 ### LandingPage 
 ![Alt text](Readme.Screenshots/landingpage.png?raw=true "Lioness-LandingPage")
