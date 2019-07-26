@@ -1,6 +1,6 @@
 import store from "./store";
 import ls from "local-storage";
-
+import {API_BASE_URL} from '../config'
 //set this to an user object to login
 let user;
 const ds = {
@@ -17,12 +17,26 @@ const ds = {
   },
   doLogin: async (email, password) => {
     // TODO set user.JWTTOKEN to the received token
-    // const res = await fetch()....
-    // user = res.user
-    // user.JWTTOKEN = res.token
-    user = store.users.find(
-      user => user.email === email && user.password === password
-    );
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+  });
+  console.log(`${API_BASE_URL}`)
+     await fetch(`${API_BASE_URL}/auth/login`,{
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers,
+    })
+    .then(r => {
+      if (r.status === 400) {
+          throw new Error('Invalid email or password')
+      }
+      return r
+  })
+  .then(r => r.json())
+  .then(responseData=>{
+    user = responseData.user
+    user.JWTTOKEN = responseData.authToken
+  })
     if (user) {
       ds.persistLoginData(user);
     }
