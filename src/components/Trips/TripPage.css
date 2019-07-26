@@ -60,4 +60,15 @@ font-size: 1.5em;
             height:auto;
           
         }
+        .largeTripList a{
+            text-decoration: none;
+            color:black;
+        }
+        .largeTripList a:visited{
+            text-decoration: none;
+        }
+        .largeTripList a:hover{
+            background-color:#C9DDFF;
+            text-decoration: underline;
+        }
 }
