@@ -13,7 +13,7 @@ This application's functionality includes:
 * Ability to create a new trip by putting the name and duration on trip
 * Ability to Edit trips 
 * Ability to delete trips
-* Ability able to add places to each trip
+* Ability to add places to each trip
 * Ability to delete a place. 
 * Ability to edit a place
 * Ability to create a new place. 
