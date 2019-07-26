@@ -3,6 +3,18 @@ import ls from "local-storage";
 import {API_BASE_URL} from '../config'
 //set this to an user object to login
 let user;
+
+const addAuthTokenHeader =  (headersObj = {}) => {
+  let headers = headersObj || new Headers()
+  const info=user.JWTTOKEN
+  headers.Authorization = `Bearer ${info}`
+  console.log(`wtf is going on`,info)
+  return headers
+ 
+  
+  
+  
+}
 const ds = {
   persistLoginData: async data => {
     return ls("authData", data);
@@ -20,7 +32,6 @@ const ds = {
     const headers = new Headers({
       'Content-Type': 'application/json',
   });
-  console.log(`${API_BASE_URL}`)
      await fetch(`${API_BASE_URL}/auth/login`,{
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -85,13 +96,25 @@ const ds = {
   //userID will be token after implementiing JWT tokens
   getTrips: async () => {
     //TODO use user.JWTTOKEN to build the Auth header
-    console.log(`ds:getTrips(${user.email})`);
-    const trips = store.trips.filter(trip => trip.user_id === user.id);
-    trips.forEach(trip => {
-      //associated records
-      trip.places = store.places.filter(place => place.trip_id === trip.id);
-    });
-    return trips;
+    // console.log(`ds:getTrips(${user.email})`);
+    // const trips = store.trips.filter(trip => trip.user_id === user.id);
+    // trips.forEach(trip => {
+    //   //associated records
+    //   trip.places = store.places.filter(place => place.trip_id === trip.id);
+    // });
+    // return trips;
+    if (!ds.getLoggedInUser()) {
+      // throw new Error(NOT_LOGGED_IN)
+      return Promise.reject(new Error('NOT_LOGGED_IN'))
+  }
+    return fetch(`${API_BASE_URL}/trips`, {
+      headers: addAuthTokenHeader(),
+  })
+      .then(r => r.json())
+      .then(data => {
+console.log(data.trips)
+          return data.trips
+      })
   },
   deletePlace: async id => {
     const { places } = store;

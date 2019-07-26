@@ -42,7 +42,9 @@ export default class TripPage extends Component {
   loadData = async () => {
     try {
       const trips = await ds.getTrips();
+      console.log(trips)
       this.context.set({ trips });
+      console.log(this.context)
       // success toast
     } catch (e) {
       //error toast
@@ -69,6 +71,7 @@ export default class TripPage extends Component {
 
   render() {
     const trips = [...this.context.trips];
+    console.log(`what is in context`,this.context)
     const selectedTrip = trips.find(t => t.id === this.state.selectedTripID);
     console.log(`hello trip selected`, selectedTrip);
     const editModeClass = this.state.editMode === true ? "hide" : "";
