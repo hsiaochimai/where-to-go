@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import TripList from "../TripList/TripList";
 import whereToGoContext from "../whereToGoContext/whereToGoContext";
 import PlaceList from "./PlaceList";
+import history from "../../history";
 import "./TripPage.css";
 const { deleteTrip } = ds;
 export default class TripPage extends Component {
@@ -19,6 +20,11 @@ export default class TripPage extends Component {
       selectedPlaceID: null
     };
     this.placeListRef = null
+  }
+  onDeleteTrip= async id=>{
+    await ds.deleteTrip(id)
+    this.props.history.go(0)
+    // this.loadData();
   }
   onSaveTrip = async trip => {
     await ds.saveTrip(trip);
@@ -89,7 +95,7 @@ export default class TripPage extends Component {
               {!selectedTrip || this.state.editMode ? null : (
                 <div className={`action-buttons  ${editModeClass}`}>
                   <button onClick={() => this.onEdit()}> <Icon icon="edit" /> Edit</button>
-                  <button onClick={() => deleteTrip(selectedTrip.id)}>
+                  <button onClick={() => this.onDeleteTrip(selectedTrip.id)}>
                     <Icon icon="trash" />
                     Delete
               </button>

@@ -62,11 +62,15 @@ const ds = {
   },
 
   deleteTrip: async id => {
-    const { trips } = store;
-    trips.splice(trips.findIndex(t => t.id === id), 1);
+    return fetch(`${API_BASE_URL}/trips/${id}`, {
+      method: 'delete',
+      headers: addAuthTokenHeader(),
+  })
+    // const { trips } = store;
+    // trips.splice(trips.findIndex(t => t.id === id), 1);
     // adding a trip
-    // trips.push({id, xx, name:'Foo' ,.......})
-    console.log(`this is delete`, trips)
+    // // trips.push({id, xx, name:'Foo' ,.......})
+    // console.log(`this is delete`, trips)
   },
   saveTrip: async tripObj => {
    
@@ -129,17 +133,27 @@ console.log(data.trips)
       })
   },
   deletePlace: async id => {
-    const { places } = store;
-    places.splice(places.findIndex(p => p.id === id), 1);
-    console.log(`did the delete work`, places);
+    return fetch(`${API_BASE_URL}/trips/deletePlace/${id}/`, {
+      method: 'delete',
+      headers: addAuthTokenHeader(),
+  })
+    // const { places } = store;
+    // places.splice(places.findIndex(p => p.id === id), 1);
+    // console.log(`did the delete work`, places);
   },
   savePlace: async placeObj => {
     const place = { ...placeObj };
-
+    const tripID= place.trip_id
+    return fetch(`${API_BASE_URL}/trips/${tripID}/upsertPlace`, {
+      method: 'post',
+      body: JSON.stringify(place),
+      headers: addAuthTokenHeader({
+          'Content-type': 'application/json'
+      }),})
     //assign an ID
-    if (place.id === -1) {
-      place.id = store.places.length + 1;
-    }
+    // if (place.id === -1) {
+    //   place.id = store.places.length + 1;
+    // }
 
     //make sure the user is the current one
     // const user = await ds.getLoggedInUser()
@@ -148,16 +162,17 @@ console.log(data.trips)
 
     //make sure numofdays is a number
 
-    const { places } = store;
-    const index = places.findIndex(p => p.id === place.id);
-    if (index > -1) {
-      places.splice(places.findIndex(p => p.id === place.id), 1, place);
-    } else {
-      places.unshift(place);
+    // const { places } = store;
+    // const index = places.findIndex(p => p.id === place.id);
+    // if (index > -1) {
+    //   places.splice(places.findIndex(p => p.id === place.id), 1, place);
+    // } else {
+    //   places.unshift(place);
 
-    }
-    console.log(`does places work?`, places)
+    // }
+    // console.log(`does places work?`, places)
   },
-};
+}
+
 
 export default ds;
