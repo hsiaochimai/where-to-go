@@ -21,7 +21,6 @@ export default class EditPlace extends Component {
 
 
   componentWillReceiveProps(nextProps) {
-    console.log(`componentWillReceiveProps`)
     this.setState({
       place: { ...nextProps.place },
       ...defaultState
@@ -62,8 +61,7 @@ export default class EditPlace extends Component {
       changedFields: [...new Set([...this.state.changedFields, fieldName])],
       place: changedPlace
     }, () => {
-      // this.validateField(fieldName, value);
-      console.log("state changed:", JSON.stringify(this.state.place, 2, 2));
+      
     });
   };
 
@@ -83,10 +81,7 @@ export default class EditPlace extends Component {
 
   render() {
     const validationMessages = this.getValidationMessages()
-    console.log('validationMessages', validationMessages);
-    console.log('state', this.state)
-    // debugger
-    console.log(`editplace`, this.props)
+    
     const {
       name,
       street_address,

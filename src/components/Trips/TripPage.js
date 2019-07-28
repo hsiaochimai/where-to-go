@@ -1,4 +1,4 @@
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { checkLoginAndRedirect } from "../../helpers";
 import ds from "../../STORE/dataService";
@@ -17,17 +17,17 @@ export default class TripPage extends Component {
       editMode: false,
       selectedPlaceID: null
     };
-    this.placeListRef = null
+    this.placeListRef = null;
   }
-  onDeleteTrip= async id=>{
-    await ds.deleteTrip(id)
-    this.props.history.go(0)
+  onDeleteTrip = async id => {
+    await ds.deleteTrip(id);
+    this.props.history.go(0);
     // this.loadData();
-  }
+  };
   onSaveTrip = async trip => {
     await ds.saveTrip(trip);
     this.loadData();
-    this.setState({ editMode: false })
+    this.setState({ editMode: false });
   };
 
   onDeletePlace = async placeID => {
@@ -41,14 +41,14 @@ export default class TripPage extends Component {
   };
 
   cancelButton = () => {
-    this.setState({ editMode: false })
-  }
+    this.setState({ editMode: false });
+  };
   loadData = async () => {
     try {
       const trips = await ds.getTrips();
-      console.log(trips)
+
       this.context.set({ trips });
-      console.log(this.context)
+
       // success toast
     } catch (e) {
       //error toast
@@ -63,7 +63,6 @@ export default class TripPage extends Component {
     return this.loadData();
   };
   onTripSelected = tripId => {
-    console.log(`hello trip selected`, tripId);
     this.setState({ selectedTripID: tripId });
   };
 
@@ -75,32 +74,33 @@ export default class TripPage extends Component {
 
   render() {
     const trips = [...this.context.trips];
-    console.log(`what is in context`,this.context)
+
     const selectedTrip = trips.find(t => t.id === this.state.selectedTripID);
-    console.log(`hello trip selected`, selectedTrip);
+
     const editModeClass = this.state.editMode === true ? "hide" : "";
 
     return (
-
       <div className="tab-page">
         <NavBar onLogout={this.context.doLogout} />
         <div className="trip-page-container">
           <TripList trips={trips} onTripSelected={this.onTripSelected} />
 
-
-          <div className='column50'>
-            <div className='title-container'>
+          <div className="column50">
+            <div className="title-container">
               {!selectedTrip || this.state.editMode ? null : (
                 <div className={`action-buttons  ${editModeClass}`}>
-                  <button onClick={() => this.onEdit()}> <Icon icon="edit" /> Edit</button>
+                  <button onClick={() => this.onEdit()}>
+                    {" "}
+                    <Icon icon="edit" /> Edit
+                  </button>
                   <button onClick={() => this.onDeleteTrip(selectedTrip.id)}>
                     <Icon icon="trash" />
                     Delete
-              </button>
+                  </button>
                 </div>
               )}
-              <div className='title'>
-                <div className={`welcome ${selectedTrip ? "hide" : ''}`}>
+              <div className="title">
+                <div className={`welcome ${selectedTrip ? "hide" : ""}`}>
                   <h2>Please Select a trip</h2>
                 </div>
                 <h2 className={`barTitle padded ${editModeClass}`}>
@@ -113,7 +113,11 @@ export default class TripPage extends Component {
                 </h2>
 
                 {this.state.editMode ? (
-                  <EditTrip onSaveTrip={this.onSaveTrip} trip={selectedTrip} cancelButton={this.cancelButton} />
+                  <EditTrip
+                    onSaveTrip={this.onSaveTrip}
+                    trip={selectedTrip}
+                    cancelButton={this.cancelButton}
+                  />
                 ) : null}
               </div>
 
@@ -132,19 +136,16 @@ export default class TripPage extends Component {
                 {/* <button onClick={ev=>{this.placeListRef && this.placeListRef.addPlace()}}>Add Place</button> */}
                 <PlaceList
                   key={selectedTrip.id}
-                  ref={ref => this.placeListRef = ref}
+                  ref={ref => (this.placeListRef = ref)}
                   trip={selectedTrip}
-                  onDeletePlace={this.onDeletePlace} 
-                  onSavePlace={this.onSavePlace} 
-                  /></>
+                  onDeletePlace={this.onDeletePlace}
+                  onSavePlace={this.onSavePlace}
+                />
+              </>
             )}
           </div>
-
-
-
         </div>
       </div>
-
     );
   }
 }

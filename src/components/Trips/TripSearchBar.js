@@ -22,7 +22,7 @@ export default class TripSearchBar extends Component {
         }
     }
     onTripSelected = (tripValue) => {
-        console.log(`hello trip selected`,tripValue)
+       
         this.setState({ selectedTripID: tripValue.value })
     }
 onEdit=() =>{
@@ -33,7 +33,7 @@ onEdit=() =>{
 
     render() {
         const selectedTrip = this.props.trips.find(t => t.id === this.state.selectedTripID)
-        console.log(`hello trip selected`,selectedTrip)
+       
         const tripOpts = [...this.props.trips]
         
         // .map(trip => {
@@ -41,7 +41,7 @@ onEdit=() =>{
         //     return options
         // })
         const editModeClass= this.state.editMode=== true ?'hide':''
-        console.log(this.state)
+        
         return (
             <div>
                 <TripList trips={tripOpts}/>

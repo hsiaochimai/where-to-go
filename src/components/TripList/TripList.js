@@ -12,7 +12,6 @@ export default class TripList extends Component{
         trips:pt.array.isRequired,
       }
     toggleList=()=>{
-        console.log('hello toggle')
         this.setState({
             visible:false
         })
@@ -29,7 +28,7 @@ export default class TripList extends Component{
         const largeTripList=largeTrip.map((trip, i)=>{
             return <li key={i} className='padded '> <a key={i} className='padded ' onClick={(e)=>{this.props.onTripSelected(trip.id)}} href="#">{trip.name}</a></li>
         })
-        console.log(this.state)
+       
         return(
             <>
         <div className={`tripList `} >

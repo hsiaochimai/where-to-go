@@ -31,7 +31,7 @@ class App extends Component {
 
   contextSetter = (obj) => {
     this.setState(obj, () => {
-      console.log('setter:', obj)
+    
     }) //trips, places or user
   }
 

@@ -70,7 +70,6 @@ export default class LoginForm extends Component {
       //TODO toast
     } else {
       this.context.set({ user })
-      console.log('Logged in as', user.email)
       this.props.history.push("/home");
     }
   }

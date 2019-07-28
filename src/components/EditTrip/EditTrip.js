@@ -77,7 +77,7 @@ let hasError= false
   onChange = (fieldName, value) => {
     const changedTrip = { ...this.state.trip, [fieldName]: value };
     this.setState({ trip: changedTrip }, () => {this.validateField(fieldName, value)
-      console.log("state changed:", JSON.stringify(this.state.trip, 2, 2));
+  
     });
   };
   componentDidMount(){
@@ -92,7 +92,6 @@ let hasError= false
   }
   render() {
 
-    console.log(`edit trip`, this.state);
     const { name, numofdays } = this.state.trip;
 
     return (
@@ -131,13 +130,7 @@ let hasError= false
     <ValidationErrors hasError={!this.state.numOfDaysValid} message={this.state.validationMessages.numofdays} />
 
         </form>
-        {/* <div className='action-buttons' >
-        <button disabled={!this.state.formValid}  onClick={ev => this.props.onSaveTrip(this.state.trip)}>
-          Save
-        </button>
-        <button onClick={ev=>this.props.cancelButton()}>Cancel</button>
-        </div> */}
-
+        
       </div>
     );
   }

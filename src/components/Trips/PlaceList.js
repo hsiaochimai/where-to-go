@@ -30,7 +30,7 @@ export default class PlaceList extends Component {
   }
   toggleeditModeIndex = index => {
     const { editModeIndex } = this.state;
-    console.log(index);
+    
     this.setState({
       newPlace: null,
       editModeIndex: editModeIndex === index ? -1 : index
@@ -69,7 +69,7 @@ export default class PlaceList extends Component {
     const trip = this.props.trip;
     const tripPlaces = trip.places;
     const newTrip = tripPlaces.findIndex(p => p.id === -1);
-    console.log(newTrip);
+    
     if (newTrip >= 0) {
       // tripPlaces.splice(newTrip, 1)
       tripPlaces.splice(newTrip, 1);

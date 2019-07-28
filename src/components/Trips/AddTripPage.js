@@ -34,7 +34,7 @@ export default class AddTripPage extends Component {
   };
 
   render() {
-    console.log(this.context)
+  
     return (
       <>
         <NavBar onLogout={this.context.doLogout} />

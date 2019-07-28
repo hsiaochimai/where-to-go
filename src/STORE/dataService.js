@@ -8,7 +8,7 @@ const addAuthTokenHeader =  (headersObj = {}) => {
   let headers = headersObj || new Headers()
   const info=user.JWTTOKEN
   headers.Authorization = `Bearer ${info}`
-  console.log(`wtf is going on`,info)
+  
   return headers
  
   
