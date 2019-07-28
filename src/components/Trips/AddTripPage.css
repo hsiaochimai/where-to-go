@@ -1,6 +1,6 @@
 .addTrip-Container{
     height:100vh;
-background-color: #F8CBB0;
+background-color: #3C91E6;
 
 }
 .addTripPage{
@@ -10,7 +10,7 @@ background-color: #F8CBB0;
     /* height: 75vh; */
     /* width:75%; */
     max-width: 400px;
-background: #C4B7CB;
+background: rgb(59, 81, 132);
     border-radius: .5em;
 }
 .addTripPage h2{

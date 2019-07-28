@@ -37,4 +37,6 @@ html {
     background-color: #D78423;
     margin: auto;
     font-size: 18px; 
+    padding: 6px;
+    border-radius: 4px;
   }
