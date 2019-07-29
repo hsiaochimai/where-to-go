@@ -26,7 +26,7 @@ export default class TripList extends Component{
         })
         const largeTrip=[...this.props.trips]
         const largeTripList=largeTrip.map((trip, i)=>{
-            return <li key={i} className='padded '> <a key={i} className='padded ' onClick={(e)=>{this.props.onTripSelected(trip.id)}} href="#">{trip.name}</a></li>
+            return <li key={i} className='largeTrips padded '> <a key={i} className='padded ' onClick={(e)=>{this.props.onTripSelected(trip.id)}} href="#">{trip.name}</a></li>
         })
        
         return(

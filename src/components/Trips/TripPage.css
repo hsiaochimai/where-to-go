@@ -6,7 +6,10 @@
 .largeTripList{
 background-color: #2951AD;
 display:none;
+color:  #F2F2F2;
+
 }
+
 .column50{
     background-color: #3C91E6;
     flex:3 1 auto;
@@ -23,8 +26,9 @@ display:none;
   flex:1;
 }
 .action-buttons button{
-    margin-top:0;
+    margin-top: 10px;
     margin-left: 1em;
+    margin-right: 0.5em;
 }
 .title{
     flex:2;
@@ -32,6 +36,7 @@ display:none;
 }
 .title h2{
 font-size: 1.5em;
+color:#F2F2F2
 }
 .welcome{
     height:100vh
@@ -62,13 +67,16 @@ font-size: 1.5em;
         }
         .largeTripList a{
             text-decoration: none;
-            color:black;
+            color:#F2F2F2;
         }
         .largeTripList a:visited{
             text-decoration: none;
         }
         .largeTripList a:hover{
-            background-color:#C9DDFF;
+            background-color:#D78423;
             text-decoration: underline;
+        }
+        .largeTripList a:active{
+            background-color:#D78423; 
         }
 }
