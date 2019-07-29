@@ -2,7 +2,7 @@
     margin-top:20px;
     clear:both;
     }
-.cardContent span{
+.cardContent label {
     margin-bottom: 5px;
     margin-left:5px;
     font-size: 16px;

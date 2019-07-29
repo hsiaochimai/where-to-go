@@ -26,8 +26,11 @@ background: rgb(59, 81, 132);
     width:100%;
 }
 .edit-trip-form label{
-font-size: 18px;
-margin-bottom: 5px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    font-size: 16px;
+    font-weight: 700;
+    padding-right:5px;
 }
 .edit-trip-form input[type="text"] {
     margin-bottom: 10px;

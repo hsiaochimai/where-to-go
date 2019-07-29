@@ -95,7 +95,7 @@ export default class EditPlace extends Component {
         <form>
           <div>
             <p>
-              <span className="">Name</span>
+              <label className="">Name</label>
               {!editMode ? (
                 name
               ) : (
@@ -114,7 +114,7 @@ export default class EditPlace extends Component {
           </div>
           <div>
             <p>
-              <span className="">Address</span>
+              <label className="">Address</label>
               {!editMode ? (
                 street_address
               ) : (
@@ -133,7 +133,7 @@ export default class EditPlace extends Component {
           </div>
           <div>
             <p>
-              <span className="">City</span>
+              <label className="">City</label>
               {!editMode ? (
                 city
               ) : (
@@ -152,7 +152,7 @@ export default class EditPlace extends Component {
           </div>
           <div>
             <p>
-              <span className="">Transportation</span>
+              <label className="">Transportation</label>
               {!editMode ? (
                 transportation
               ) : (
@@ -171,7 +171,7 @@ export default class EditPlace extends Component {
           </div>
           <div>
             <p>
-              <span className="">Notes</span>
+              <label className="">Notes</label>
               {!editMode ? (
                 notes
               ) : (
