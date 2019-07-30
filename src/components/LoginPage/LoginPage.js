@@ -75,7 +75,7 @@ export default class LoginForm extends Component {
   }
   render() {
     return (
-      <div role="main" className="LoginPage-Container">
+      <div role="main" className="LoginPage-Container flexed">
         <div className="LoginPage padded">
           <h2>Where to go!</h2>
           <p>

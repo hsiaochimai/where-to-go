@@ -1,82 +1,90 @@
-.trip-page-container{
-    display:flex;
+.trip-page-container {
+    display: flex;
     flex-direction: column;
-    height:100vh;
-}
-.largeTripList{
-background-color: #2951AD;
-display:none;
-color:  #F2F2F2;
-
+    /* height:100vh; */
 }
 
-.column50{
+.largeTripList {
+    background-color: #2951AD;
+    display: none;
+    color: #F2F2F2;
+}
+
+.column50 {
     background-color: #3C91E6;
-    flex:3 1 auto;
-    height:auto;
-  
+    flex: 3 1 auto;
+    height: auto;
 }
 
-.action-buttons{
+.action-buttons {
     /* display:block;
     margin-left: 250px; */
     display: flex;
-  float: right;
-  padding-left: 2em;
-  flex:1;
+    float: right;
+    padding-left: 2em;
+    flex: 1;
+    justify-content: flex-end;
 }
-.action-buttons button{
+
+.action-buttons button {
     /* margin-top: 10px; */
     /* margin-left: 1em; */
     /* margin-right: 0.5em; */
 }
-.title{
-    flex:2;
-    background-color:rgb(59, 81, 132);
+
+.title-container {
+    background-color: rgb(59, 81, 132);
 }
-.title h2{
-font-size: 1.5em;
-color:#F2F2F2
+
+.title {
+    flex: 2;
+    /* background-color:rgb(59, 81, 132); */
 }
-.welcome{
-    height:100vh
+
+.title h2 {
+    font-size: 1.5em;
+    color: #F2F2F2
 }
+
+.welcome {
+    /* height:100vh; */
+}
+
 .addPlace {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 @media only screen and (min-width: 700px) {
-    .trip-page-container{
-        display:flex;
+    .trip-page-container {
+        display: flex;
         flex-direction: row;
         background-color: #2951AD;
         height: auto;
     }
-    .tripList-select{
+    .tripList-select {
         display: none
     }
-    .largeTripList{
+    .largeTripList {
         background-color: #2951AD;
-        display:block;
-        height:100vh;
-        }
-        .column50{
-           
-            height:auto;
-          
-        }
-        .largeTripList a{
-            text-decoration: none;
-            color:#F2F2F2;
-        }
-        .largeTripList a:visited{
-            text-decoration: none;
-        }
-        .largeTripList a:hover{
-            background-color:#D78423;
-            text-decoration: underline;
-        }
-        .largeTripList a:active{
-            background-color:#D78423; 
-        }
+        display: block;
+        /* height:100vh; */
+    }
+    .column50 {
+        height: auto;
+    }
+    .largeTripList a {
+        text-decoration: none;
+        color: #F2F2F2;
+    }
+    .largeTripList a:visited {
+        text-decoration: none;
+    }
+    .largeTripList a:hover {
+        background-color: #D78423;
+        text-decoration: underline;
+    }
+    .largeTripList a:active {
+        background-color: #D78423;
+    }
 }

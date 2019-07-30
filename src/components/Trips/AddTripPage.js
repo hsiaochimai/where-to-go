@@ -38,7 +38,7 @@ export default class AddTripPage extends Component {
     return (
       <>
         <NavBar onLogout={this.context.doLogout} />
-        <div className='addTrip-Container'>
+        <div className='addTrip-Container flexed flex-column padded'>
           <div className='addTripPage padded'>
             <h2>Add Trip</h2>
             <EditTrip

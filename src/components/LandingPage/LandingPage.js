@@ -8,10 +8,9 @@ export default class LandingPage extends Component {
     static contextType = whereToGoContext;
     render() {
         return (
-            <div>
-
+            <>
                 <NavBar onLogout={this.context.doLogout} />
-                <div className='landing-page flex-column '>
+                <div className='landing-page flex-column flexed padded '>
                     <h1 >Welcome to Where To Go!</h1>
                     <p >Get started by adding a new trip!</p>
                     <div>
@@ -19,8 +18,7 @@ export default class LandingPage extends Component {
                     </div>
 
                 </div>
-
-            </div>
+            </>
         )
     }
 }

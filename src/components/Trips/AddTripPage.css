@@ -1,39 +1,43 @@
-.addTrip-Container{
-    height:100vh;
-background-color: #3C91E6;
-
+.addTrip-Container {
+    /* height:100vh; */
+    background-color: #3C91E6;
 }
-.addTripPage{
+
+.addTripPage {
     display: flex;
     flex-direction: column;
     margin: auto;
     /* height: 75vh; */
     /* width:75%; */
     max-width: 400px;
-background: rgb(59, 81, 132);
+    background: rgb(59, 81, 132);
     border-radius: .5em;
 }
-.addTripPage h2{
-    margin-top: 5%;
+
+.addTripPage h2 {
+    /* margin-top: 5%; */
     text-align: center;
-    font-size:2em;
-    color:black;
-    margin-bottom: 5%;
+    font-size: 2em;
+    color: black;
+    /* margin-bottom: 5%; */
 }
-.edit-trip-form{
+
+.edit-trip-form {
     margin: auto;
-    color:black;
-    width:100%;
+    color: black;
+    width: 100%;
 }
-.edit-trip-form label{
+
+.edit-trip-form label {
     margin-bottom: 5px;
-    margin-left:5px;
+    margin-left: 5px;
     font-size: 16px;
     font-weight: 700;
-    padding-right:5px;
+    padding-right: 5px;
 }
+
 .edit-trip-form input[type="text"] {
     margin-bottom: 10px;
     width: 100%;
     font-size: 18px;
-  }
+}
