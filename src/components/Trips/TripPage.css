@@ -62,6 +62,9 @@
         background-color: #2951AD;
         height: auto;
     }
+    .tripList {
+        max-width: 30%;
+    }
     .tripList-select {
         display: none
     }
@@ -76,11 +79,14 @@
     .largeTripList a {
         text-decoration: none;
         color: #F2F2F2;
+        display: block;
+        margin-bottom: .5em;
+        word-wrap: break-word;
     }
     .largeTripList a:visited {
         text-decoration: none;
     }
-    .largeTripList a:hover {
+    .largeTripList a:hover, .active a {
         background-color: #D78423;
         text-decoration: underline;
     }

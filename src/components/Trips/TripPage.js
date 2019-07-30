@@ -79,9 +79,12 @@ export default class TripPage extends Component {
 
     const editModeClass = this.state.editMode === true ? "hide" : "";
 
+    console.log(this)
+    debugger
+
     return (
       <>
-        <NavBar onLogout={this.context.doLogout} />
+        <NavBar activeRoute={this.props.location.pathname} onLogout={this.context.doLogout} />
         <div className="trip-page-container flexed">
           <TripList trips={trips} onTripSelected={this.onTripSelected} />
 
