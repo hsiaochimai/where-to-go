@@ -26,9 +26,9 @@ color:  #F2F2F2;
   flex:1;
 }
 .action-buttons button{
-    margin-top: 10px;
-    margin-left: 1em;
-    margin-right: 0.5em;
+    /* margin-top: 10px; */
+    /* margin-left: 1em; */
+    /* margin-right: 0.5em; */
 }
 .title{
     flex:2;

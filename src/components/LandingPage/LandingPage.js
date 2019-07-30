@@ -14,8 +14,9 @@ export default class LandingPage extends Component {
                 <div className='landing-page flex-column '>
                     <h1 >Welcome to Where To Go!</h1>
                     <p >Get started by adding a new trip!</p>
-
-                    <Link to='/add-trip'> <button>  <Icon icon="suitcase" /> Add Trip</button></Link>
+                    <div>
+                        <Link className="button" to='/add-trip'>   <Icon icon="suitcase" /> Add Trip </Link>
+                    </div>
 
                 </div>
 

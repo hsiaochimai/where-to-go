@@ -91,7 +91,7 @@ export default class TripPage extends Component {
                 <div className={`action-buttons  ${editModeClass}`}>
                   <button onClick={() => this.onEdit()}>
                     {" "}
-                    <Icon icon="edit" /> Edit
+                    <Icon icon="edit" />Edit
                   </button>
                   <button onClick={() => this.onDeleteTrip(selectedTrip.id)}>
                     <Icon icon="trash" />
