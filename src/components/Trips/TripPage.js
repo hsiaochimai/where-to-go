@@ -85,7 +85,7 @@ export default class TripPage extends Component {
         <div className="trip-page-container">
           <TripList trips={trips} onTripSelected={this.onTripSelected} />
 
-          <div className="column50">
+          <div role="main" className="column50">
             <div className="title-container">
               {!selectedTrip || this.state.editMode ? null : (
                 <div className={`action-buttons  ${editModeClass}`}>
@@ -101,16 +101,18 @@ export default class TripPage extends Component {
               )}
               <div className="title">
                 <div className={`welcome ${selectedTrip ? "hide" : ""}`}>
-                  <h2>Please Select a trip</h2>
+                  <h1>Please Select a trip</h1>
                 </div>
-                <h2 className={`barTitle padded ${editModeClass}`}>
-                  {!selectedTrip ? null : selectedTrip.name}
-                </h2>
-                <h2 className={`barTitle padded ${editModeClass}`}>
-                  {!selectedTrip
-                    ? null
-                    : `Number of Days: ${selectedTrip.numofdays} days`}
-                </h2>
+
+                {!selectedTrip ? null :
+                  <h2 className={`barTitle padded ${editModeClass}`}>{selectedTrip.name}</h2>
+                }
+
+
+                {!selectedTrip
+                  ? null
+                  : <h2 className={`barTitle padded ${editModeClass}`}>Number of Days: {selectedTrip.numofdays} days</h2>
+                }
 
                 {this.state.editMode ? (
                   <EditTrip
