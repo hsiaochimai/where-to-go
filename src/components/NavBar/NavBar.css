@@ -25,3 +25,7 @@
     background-color:#C9DDFF;
     text-decoration: underline;
 }
+.nav-bar .active a{
+    background-color:#C9DDFF;
+    text-decoration: underline; 
+}

@@ -7,9 +7,9 @@ export default class NavBar extends Component {
         return (
             <nav className='nav-bar'>
                 <ul>
-                    <li className={`${activeRoute === '/dashboard' ? 'active' : ''}`}> <Link to='/dashboard'>Dashboard</Link></li>
-                    <li className={`${activeRoute === '/add-trip' ? 'active' : ''}`}> <Link to='/add-trip'>Add trip</Link> </li>
-                    <li><a onClick={this.props.onLogout} href="#">Logout</a></li>
+                    <li className={`${activeRoute === '/dashboard' ? 'active' : ''}`}> <Link className='padded' to='/dashboard'>Dashboard</Link></li>
+                    <li className={`${activeRoute === '/add-trip' ? 'active' : ''}`}> <Link className='padded' to='/add-trip'>Add trip</Link> </li>
+                    <li><a className='padded' onClick={this.props.onLogout} href="#">Logout</a></li>
                 </ul>
             </nav>
         )
