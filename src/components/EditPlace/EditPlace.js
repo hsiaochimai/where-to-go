@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ControlledInput from "../ControlledInput/ControlledInput";
 import ValidationErrors from "../ValidationErrors/ValidationErrors";
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import './EditPlace.css'
 
 
@@ -61,7 +62,7 @@ export default class EditPlace extends Component {
       changedFields: [...new Set([...this.state.changedFields, fieldName])],
       place: changedPlace
     }, () => {
-      
+
     });
   };
 
@@ -81,7 +82,7 @@ export default class EditPlace extends Component {
 
   render() {
     const validationMessages = this.getValidationMessages()
-    
+
     const {
       name,
       street_address,
@@ -193,9 +194,13 @@ export default class EditPlace extends Component {
         {editMode ? (
           <div>
             <button disabled={!this.formValid()} onClick={ev => this.props.onSubmitPlace(this.state.place)}>
+              <Icon icon="save" />
               Save
             </button>
-            <button onClick={ev => this.props.cancelAddPlace()}>Cancel</button>{" "}
+            <button onClick={ev => this.props.cancelAddPlace()}>
+              <Icon icon="window-close" />
+              Cancel
+              </button>
           </div>
         ) : null}
       </div>

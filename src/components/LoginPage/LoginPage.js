@@ -75,42 +75,42 @@ export default class LoginForm extends Component {
   }
   render() {
     return (
-      <div className="LoginPage-Container">
-         <div className="LoginPage padded">
-        <h2>Where to go!</h2>
-        <p>
-          Where to go is a trip management tool where you can store places you want to go for upcoming trips!
+      <div role="main" className="LoginPage-Container flexed">
+        <div className="LoginPage padded">
+          <h2>Where to go!</h2>
+          <p>
+            Where to go is a trip management tool where you can store places you want to go for upcoming trips!
           </p>
 
-        <h2>Login</h2>
-        <form className="LoginForm" onSubmit={e => this.handleLoginSubmit(e)}>
-          <label htmlFor="email"> Email:</label>
-          <input
-            type="text"
-            id="email"
-            onChange={e => this.emailChanged(e.target.value)}
-          />
-          <ValidationErrors
-            hasError={!this.state.emailValid}
-            message={this.state.emailValidationMessage}
-          />
-          <label htmlFor="password"> Password:</label>
-          <input
-            name="password"
-            type="password"
-            id="password"
-            onChange={e => this.passwordChanged(e.target.value)}
-          />
-          <ValidationErrors
-            hasError={!this.state.passwordValid}
-            message={this.state.passwordValidationMessage}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <div className="padded-top">
-          <p>Demo Email: demo@demo.com</p>
-          <p>Demo Password: demo</p>
-        </div>
+          <h2>Login</h2>
+          <form className="LoginForm" onSubmit={e => this.handleLoginSubmit(e)}>
+            <label htmlFor="email"> Email:</label>
+            <input
+              type="text"
+              id="email"
+              onChange={e => this.emailChanged(e.target.value)}
+            />
+            <ValidationErrors
+              hasError={!this.state.emailValid}
+              message={this.state.emailValidationMessage}
+            />
+            <label htmlFor="password"> Password:</label>
+            <input
+              name="password"
+              type="password"
+              id="password"
+              onChange={e => this.passwordChanged(e.target.value)}
+            />
+            <ValidationErrors
+              hasError={!this.state.passwordValid}
+              message={this.state.passwordValidationMessage}
+            />
+            <button type="submit">Submit</button>
+          </form>
+          <div className="padded-top">
+            <p>Demo Email: demo@demo.com</p>
+            <p>Demo Password: demo</p>
+          </div>
         </div>
       </div>
     )

@@ -1,42 +1,88 @@
 html {
-    background-image: url("./images/Orangevan.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-  }
+  background-image: url("./images/Orangevan.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 
-  .App {
-    height: 100vh;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  /*global styles*/
-  .padded {
-    padding: 1em;
-  }
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .flex-column {
-    display: flex;
-    flex-direction: column;
-  }
-  .h-spaced {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-  .hide {
-    display: none;
-  }
-  button{
-    display: block;
-    margin: auto;
-    display: block;
-    background-color: #D78423;
-    margin: auto;
-    font-size: 18px; 
-    padding: 6px;
-    border-radius: 4px;
-  }
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.7em;
+}
+
+h1, h2 {
+  margin-top: .6em;
+  margin-bottom: .8em;
+}
+
+.App {
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*global styles*/
+
+.padded {
+  padding: 1em;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexed {
+  flex: 1;
+}
+
+.h-spaced {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+button, .button {
+  color: black;
+  display: inline-block;
+  margin: .5em .5em .5em 0;
+  text-decoration: none;
+  background-color: #D78423;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 4px;
+  /* border-width: 1px; */
+  border: none;
+  outline: none;
+}
+
+button>svg, .button>svg {
+  margin-right: .3em;
+}
+
+button:hover>svg, .button:hover>svg {
+  color: white;
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+button:disabled:hover>svg, .button:disabled:hover>svg {
+  color: black;
+}
+
+.accent-color {
+  color: white;
+}

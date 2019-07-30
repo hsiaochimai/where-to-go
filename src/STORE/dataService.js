@@ -68,8 +68,8 @@ const ds = {
   })
     
   },
-  saveTrip: async tripObj => {
-   
+  saveTrip: async trip => {
+    const {places, ...tripObj} = trip
     const user= await ds.getLoggedInUser()
     tripObj.user_id = user.id
     tripObj.numofdays = +tripObj.numofdays;

@@ -8,18 +8,17 @@ export default class LandingPage extends Component {
     static contextType = whereToGoContext;
     render() {
         return (
-            <div>
-
+            <>
                 <NavBar onLogout={this.context.doLogout} />
-                <div className='landing-page flex-column '>
+                <div className='landing-page flex-column flexed padded '>
                     <h1 >Welcome to Where To Go!</h1>
                     <p >Get started by adding a new trip!</p>
-
-                    <Link to='/add-trip'> <button>  <Icon icon="suitcase" /> Add Trip</button></Link>
+                    <div>
+                        <Link className="button" to='/add-trip'>   <Icon icon="suitcase" /> Add Trip </Link>
+                    </div>
 
                 </div>
-
-            </div>
+            </>
         )
     }
 }

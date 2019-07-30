@@ -105,7 +105,7 @@ let hasError= false
         </div>
 
         <form className='edit-trip-form flex-column'>
-            <label>Trip name:</label>
+            <label className="accent-color">Trip name:</label>
             <ControlledInput
               onChange={value => this.onChange("name", value)}
               tag="input"
@@ -117,7 +117,7 @@ let hasError= false
       <ValidationErrors hasError={!this.state.tripNameValid} message={this.state.validationMessages.name} />
 
          
-            <label>Number of Days:</label>
+            <label className="accent-color">Number of Days:</label>
             <ControlledInput
               onChange={value => this.onChange("numofdays", value)}
               tag="input"

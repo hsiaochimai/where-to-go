@@ -80,18 +80,18 @@ export default class TripPage extends Component {
     const editModeClass = this.state.editMode === true ? "hide" : "";
 
     return (
-      <div className="tab-page">
-        <NavBar onLogout={this.context.doLogout} />
-        <div className="trip-page-container">
+      <>
+        <NavBar activeRoute={this.props.location.pathname} onLogout={this.context.doLogout} />
+        <div className="trip-page-container flexed">
           <TripList trips={trips} onTripSelected={this.onTripSelected} />
 
-          <div className="column50">
-            <div className="title-container">
+          <div role="main" className="column50">
+            <div className="title-container flex-column">
               {!selectedTrip || this.state.editMode ? null : (
                 <div className={`action-buttons  ${editModeClass}`}>
                   <button onClick={() => this.onEdit()}>
-                    {" "}
-                    <Icon icon="edit" /> Edit
+
+                    <Icon icon="edit" />Edit
                   </button>
                   <button onClick={() => this.onDeleteTrip(selectedTrip.id)}>
                     <Icon icon="trash" />
@@ -99,18 +99,20 @@ export default class TripPage extends Component {
                   </button>
                 </div>
               )}
-              <div className="title">
+              <div className="title padded">
                 <div className={`welcome ${selectedTrip ? "hide" : ""}`}>
-                  <h2>Please Select a trip</h2>
+                  <h1 className="accent-color">Please Select a trip</h1>
                 </div>
-                <h2 className={`barTitle padded ${editModeClass}`}>
-                  {!selectedTrip ? null : selectedTrip.name}
-                </h2>
-                <h2 className={`barTitle padded ${editModeClass}`}>
-                  {!selectedTrip
-                    ? null
-                    : `Number of Days: ${selectedTrip.numofdays} days`}
-                </h2>
+
+                {!selectedTrip ? null :
+                  <h2 className={`barTitle ${editModeClass}`}>{selectedTrip.name}</h2>
+                }
+
+
+                {!selectedTrip
+                  ? null
+                  : <h2 className={`barTitle ${editModeClass}`}>Number of Days: {selectedTrip.numofdays} days</h2>
+                }
 
                 {this.state.editMode ? (
                   <EditTrip
@@ -145,7 +147,7 @@ export default class TripPage extends Component {
             )}
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

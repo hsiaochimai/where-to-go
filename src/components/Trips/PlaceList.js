@@ -30,7 +30,7 @@ export default class PlaceList extends Component {
   }
   toggleeditModeIndex = index => {
     const { editModeIndex } = this.state;
-    
+
     this.setState({
       newPlace: null,
       editModeIndex: editModeIndex === index ? -1 : index
@@ -69,7 +69,7 @@ export default class PlaceList extends Component {
     const trip = this.props.trip;
     const tripPlaces = trip.places;
     const newTrip = tripPlaces.findIndex(p => p.id === -1);
-    
+
     if (newTrip >= 0) {
       // tripPlaces.splice(newTrip, 1)
       tripPlaces.splice(newTrip, 1);
@@ -141,8 +141,10 @@ className={`saveButton flexed `} >Save</button>
       return card;
     });
     return (
-      <div className="placeList">
-        <button className='addPlace' disabled={this.state.newPlace} onClick={() => this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
+      <div className="placeList padded">
+        <div style={{ textAlign: 'center' }}>
+          <button className='addPlace' disabled={this.state.newPlace} onClick={() => this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
+        </div>
         {placeCard}
       </div>);
   }
