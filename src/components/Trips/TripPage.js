@@ -79,9 +79,6 @@ export default class TripPage extends Component {
 
     const editModeClass = this.state.editMode === true ? "hide" : "";
 
-    console.log(this)
-    debugger
-
     return (
       <>
         <NavBar activeRoute={this.props.location.pathname} onLogout={this.context.doLogout} />
