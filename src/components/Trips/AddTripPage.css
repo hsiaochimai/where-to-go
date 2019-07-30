@@ -7,19 +7,14 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    /* height: 75vh; */
-    /* width:75%; */
     max-width: 400px;
     background: rgb(59, 81, 132);
     border-radius: .5em;
 }
 
 .addTripPage h2 {
-    /* margin-top: 5%; */
     text-align: center;
     font-size: 2em;
-    color: black;
-    /* margin-bottom: 5%; */
 }
 
 .edit-trip-form {

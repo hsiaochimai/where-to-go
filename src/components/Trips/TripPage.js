@@ -90,7 +90,7 @@ export default class TripPage extends Component {
               {!selectedTrip || this.state.editMode ? null : (
                 <div className={`action-buttons  ${editModeClass}`}>
                   <button onClick={() => this.onEdit()}>
-                    
+
                     <Icon icon="edit" />Edit
                   </button>
                   <button onClick={() => this.onDeleteTrip(selectedTrip.id)}>
@@ -101,7 +101,7 @@ export default class TripPage extends Component {
               )}
               <div className="title padded">
                 <div className={`welcome ${selectedTrip ? "hide" : ""}`}>
-                  <h1>Please Select a trip</h1>
+                  <h1 className="accent-color">Please Select a trip</h1>
                 </div>
 
                 {!selectedTrip ? null :

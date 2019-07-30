@@ -141,7 +141,7 @@ className={`saveButton flexed `} >Save</button>
       return card;
     });
     return (
-      <div className="placeList">
+      <div className="placeList padded">
         <div style={{ textAlign: 'center' }}>
           <button className='addPlace' disabled={this.state.newPlace} onClick={() => this.addPlace()}> <Icon icon="map-marked-alt" /> Add Place</button>
         </div>

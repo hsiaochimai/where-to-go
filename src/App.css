@@ -76,5 +76,13 @@ button:hover>svg, .button:hover>svg {
 }
 
 button:disabled {
-  background-color: white;
+  background-color: lightgray;
+}
+
+button:disabled:hover>svg, .button:disabled:hover>svg {
+  color: black;
+}
+
+.accent-color {
+  color: white;
 }
